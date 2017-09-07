@@ -1,0 +1,8 @@
+name: BugReport
+version: ALPHA
+author: tatemylove
+main: com.tatemylove.BugReport.Main
+commands:
+  bugreport:
+    usage: /<command>
+    description: Reports a bug

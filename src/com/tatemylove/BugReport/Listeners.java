@@ -32,7 +32,7 @@ public class Listeners implements Listener{
 
         if(inventory.getName().equals(Reports.reportInv.getName())){
             Reports.k = 0;
-            Reports.k2 = 2;
+            Reports.k2 = 0;
             Reports.k3 = 0;
             if(clicked.getType() == Material.BOOK){
                 e.setCancelled(true);

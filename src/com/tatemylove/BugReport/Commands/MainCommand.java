@@ -1,5 +1,6 @@
 package com.tatemylove.BugReport.Commands;
 
+import com.tatemylove.BugReport.Files.DataFile;
 import com.tatemylove.BugReport.Main;
 import com.tatemylove.BugReport.Misc.Reports;
 import org.bukkit.command.Command;
@@ -38,10 +39,19 @@ public class MainCommand implements CommandExecutor {
                     p.sendMessage("§aBug Manager Help Section");
                     p.sendMessage("§d/bugreport help ~ Brings up the help section");
                     p.sendMessage("§d/bugreport create [Title] [Description] ~ Creates a bug report");
+                    p.sendMessage("§b/bugreport view ~ Ingame viewing of bug reports");
+                    p.sendMessage("§c/bugreport reload ~ Reloads the data yml file, always do this before viewing reports");
                 }
                 if(args[0].equalsIgnoreCase("view")){
                     if(p.hasPermission("bugreport.view")){
+                        DataFile.reloadData();
                         p.openInventory(Reports.reportInv);
+                    }
+                }
+                if(args[0].equalsIgnoreCase("reload")){
+                    if(p.hasPermission("bugreport.reload")){
+                        DataFile.saveData();
+                        DataFile.reloadData();
                     }
                 }
 

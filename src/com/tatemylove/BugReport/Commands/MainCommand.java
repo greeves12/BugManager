@@ -19,6 +19,7 @@ public class MainCommand implements CommandExecutor {
             p.sendMessage("§6Please use /bugreport help for assistance");
             p.sendMessage("§6Plugin version " + Main.version);
             p.sendMessage("§6Developers: tatemylove (greeves12)");
+            p.sendMessage("§dThe bukkit page: §bhttps://dev.bukkit.org/projects/bugmanager");
     }
             if(args.length >= 1) {
                 if (args[0].equalsIgnoreCase("create")) {
@@ -50,6 +51,7 @@ public class MainCommand implements CommandExecutor {
                 }
                 if(args[0].equalsIgnoreCase("reload")){
                     if(p.hasPermission("bugreport.reload")){
+                        p.sendMessage(Main.prefix + "§eDatabase reloaded!");
                         DataFile.saveData();
                         DataFile.reloadData();
                     }

@@ -2,6 +2,7 @@ package com.tatemylove.BugReport;
 
 import com.tatemylove.BugReport.Commands.MainCommand;
 import com.tatemylove.BugReport.Files.DataFile;
+import com.tatemylove.BugReport.Misc.Reminder;
 import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -11,12 +12,13 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class Main extends JavaPlugin{
     public static String prefix = "§d[Bug§bManager] ";
-    public static String version = "vALPHA";
+    public static String version = "RELEASE v.1.0";
+    private static int startCountdownId;
 
     public void onEnable(){
 
         Bukkit.getServer().getPluginManager().registerEvents(new Listeners(), this);
-
+        startCountDown();
         ConsoleCommandSender cs = getServer().getConsoleSender();
         cs.sendMessage("§4=-=-=-=-=-=-=-=-");
         cs.sendMessage("§1Running BugManager ver " + version);
@@ -28,5 +30,17 @@ public class Main extends JavaPlugin{
         MainCommand cmd = new MainCommand();
         getCommand("bugreport").setExecutor(cmd);
 
+    }
+
+    public void startCountDown() {
+        startCountdownId = getServer().getScheduler().scheduleSyncRepeatingTask((this), new Reminder(this), 0L, 20L);
+        Reminder.timeUntilStart = 60;
+    }
+    public void stopCountDown(){
+        getServer().getScheduler().cancelTask(startCountdownId);
+    }
+    public void restartCountdown(){
+        stopCountDown();
+        startCountDown();
     }
 }

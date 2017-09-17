@@ -36,12 +36,13 @@ public class MainCommand implements CommandExecutor {
                     }
                 }
                 if(args[0].equalsIgnoreCase("help")){
-                    p.sendMessage("§d=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+                    p.sendMessage("§b=-=-=-Bug-Manager-=-=-=-");
                     p.sendMessage("§aBug Manager Help Section");
                     p.sendMessage("§d/bugreport help ~ Brings up the help section");
                     p.sendMessage("§d/bugreport create [Title] [Description] ~ Creates a bug report");
                     p.sendMessage("§b/bugreport view ~ Ingame viewing of bug reports");
                     p.sendMessage("§c/bugreport reload ~ Reloads the data yml file, always do this before viewing reports");
+                    p.sendMessage("§b=-=-=--=-=-=-");
                 }
                 if(args[0].equalsIgnoreCase("view")){
                     if(p.hasPermission("bugreport.view")){

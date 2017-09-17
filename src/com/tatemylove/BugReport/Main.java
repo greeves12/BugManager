@@ -23,11 +23,12 @@ public class Main extends JavaPlugin{
         Bukkit.getServer().getPluginManager().registerEvents(new Listeners(), this);
         startCountDown();
         ConsoleCommandSender cs = getServer().getConsoleSender();
-        cs.sendMessage("§4=-=-=-=-=-=-=-=-");
-        cs.sendMessage("§1Running BugManager ver " + version);
-        cs.sendMessage("§1Plugin made by tatemylove");
-        cs.sendMessage("§1Report plugin bugs on the bukkit page, please.");
-        cs.sendMessage("§4=-=-=-=-=-=-=-=-");
+        cs.sendMessage("§b=-=-=-Bug-Manager-=-=-=-");
+        cs.sendMessage("§6Do not decompile the plugin without permission");
+        cs.sendMessage("§6Do not claim this code as yours");
+        cs.sendMessage("§6Altering this code, is an infringement under the copyright act");
+        cs.sendMessage("§dYou are running version: " + version + " §aby: greeves12");
+        cs.sendMessage("§b=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
 
 
         getConfig().options().copyDefaults(true);

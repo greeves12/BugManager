@@ -34,7 +34,6 @@ public class Reports {
             newID = ((Integer) numbers.lastEntry().getValue()).intValue() + 1;
         }
 
-
         DataFile.getData().set("Reports." + newID + ".Player", p.getName());
         DataFile.getData().set("Reports." + newID + ".Title", title);
         DataFile.getData().set("Reports." + newID + ".Description", desc);

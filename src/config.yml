@@ -1,0 +1,5 @@
+# This is the interval between each message in seconds
+reminder-interval: 300
+
+# Define the message you want to send to the players
+reminder-message: "&dIf you encounter a bug, please report it! \n&b/bugreport <title> <description>"

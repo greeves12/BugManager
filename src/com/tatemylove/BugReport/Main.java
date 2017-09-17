@@ -5,6 +5,7 @@ import com.tatemylove.BugReport.Files.DataFile;
 import com.tatemylove.BugReport.Misc.Reminder;
 import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -14,6 +15,8 @@ public class Main extends JavaPlugin{
     public static String prefix = "§d[Bug§bManager] ";
     public static String version = "RELEASE v.1.0";
     private static int startCountdownId;
+    FileConfiguration config = getConfig();
+    public static int timeUntilStart;
 
     public void onEnable(){
 
@@ -26,6 +29,10 @@ public class Main extends JavaPlugin{
         cs.sendMessage("§1Report plugin bugs on the bukkit page, please.");
         cs.sendMessage("§4=-=-=-=-=-=-=-=-");
 
+
+        getConfig().options().copyDefaults(true);
+        saveDefaultConfig();
+
         DataFile.setup(this);
         MainCommand cmd = new MainCommand();
         getCommand("bugreport").setExecutor(cmd);
@@ -34,7 +41,7 @@ public class Main extends JavaPlugin{
 
     public void startCountDown() {
         startCountdownId = getServer().getScheduler().scheduleSyncRepeatingTask((this), new Reminder(this), 0L, 20L);
-        Reminder.timeUntilStart = 60;
+        timeUntilStart = getConfig().getInt("reminder-interval");
     }
     public void stopCountDown(){
         getServer().getScheduler().cancelTask(startCountdownId);

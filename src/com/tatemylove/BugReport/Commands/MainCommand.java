@@ -3,6 +3,7 @@ package com.tatemylove.BugReport.Commands;
 import com.tatemylove.BugReport.Files.DataFile;
 import com.tatemylove.BugReport.Main;
 import com.tatemylove.BugReport.Misc.Reports;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -14,6 +15,7 @@ import java.util.StringJoiner;
  * Created by Tate on 9/3/2017.
  */
 public class MainCommand implements CommandExecutor {
+    Main plugin;
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
 
@@ -36,7 +38,7 @@ public class MainCommand implements CommandExecutor {
                             desc = desc + arg;
                         }
                         Reports.fileReport(p, title, desc);
-                        p.sendMessage(Main.prefix + "§bThanks for reporting!");
+                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + plugin.getConfig().getString("pmessage")));
                         return true;
                     }
 
@@ -65,6 +67,9 @@ public class MainCommand implements CommandExecutor {
                     DataFile.saveData();
                     DataFile.reloadData();
                 }
+            }
+            if(args[0].equalsIgnoreCase(("version"))){
+                p.sendMessage(Main.prefix + "§aRunning version " + Main.version);
             }
 
         }

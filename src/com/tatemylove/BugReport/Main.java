@@ -13,12 +13,12 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class Main extends JavaPlugin{
     public static String prefix = "§d[Bug§bManager] ";
-    public static String version = "RELEASE v.1.0";
+    public static String version = "RELEASE v1.2";
     private static int startCountdownId;
     FileConfiguration config = getConfig();
     public static int timeUntilStart;
 
-    public void onEnable(){
+    public void onEnable() {
 
         Bukkit.getServer().getPluginManager().registerEvents(new Listeners(), this);
         startCountDown();
@@ -37,7 +37,9 @@ public class Main extends JavaPlugin{
         DataFile.setup(this);
         MainCommand cmd = new MainCommand();
         getCommand("bugreport").setExecutor(cmd);
-
+        if (getConfig().getBoolean("auto-update", true)) {
+            Updater updater = new Updater(this, 277007, this.getFile(), Updater.UpdateType.DEFAULT, true);
+        }
     }
 
     public void startCountDown() {

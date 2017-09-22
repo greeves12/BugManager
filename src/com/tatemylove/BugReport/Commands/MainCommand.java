@@ -38,7 +38,7 @@ public class MainCommand implements CommandExecutor {
                             desc = desc + arg;
                         }
                         Reports.fileReport(p, title, desc);
-                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + plugin.getConfig().getString("pmessage")));
+                        p.sendMessage(Main.prefix + "§bThanks for reporting!");
                         return true;
                     }
 
@@ -53,6 +53,7 @@ public class MainCommand implements CommandExecutor {
                 p.sendMessage("§d/bugreport create [Title] [Description] ~ Creates a bug report");
                 p.sendMessage("§b/bugreport view ~ Ingame viewing of bug reports");
                 p.sendMessage("§c/bugreport reload ~ Reloads the data yml file, always do this before viewing reports");
+                p.sendMessage(("§4/bugreport version ~ Checks the current version"));
                 p.sendMessage("§b=-=-=--=-=-=-");
             }
             if (args[0].equalsIgnoreCase("view")) {

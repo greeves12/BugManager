@@ -7,6 +7,4 @@ reminder-message: "&dIf you encounter a bug, please report it! \n&b/bugreport <t
 # Disable or Enable auto updating
 auto-update: true
 
-#Bug report message
-pmessage: "§bThanks for reporting!"
 

@@ -1,7 +1,7 @@
-package com.tatemylove.BugReport;
+package com.tatemylove.BugReport.Updater;
 
 /**
- * Created by Tate on 9/19/2017.
+ * Created by Tate on 9/21/2017.
  */
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -232,6 +232,47 @@ public class Updater {
         final File updaterFile = new File(pluginFile, "Updater");
         final File updaterConfigFile = new File(updaterFile, "config.yml");
 
+        YamlConfiguration config = new YamlConfiguration();
+        config.options().header("This configuration file affects all plugins using the Updater system (version 2+ - http://forums.bukkit.org/threads/96681/ )" + '\n'
+                + "If you wish to use your API key, read http://wiki.bukkit.org/ServerMods_API and place it below." + '\n'
+                + "Some updating systems will not adhere to the disabled value, but these may be turned off in their plugin's configuration.");
+        config.addDefault(API_KEY_CONFIG_KEY, API_KEY_DEFAULT);
+        config.addDefault(DISABLE_CONFIG_KEY, DISABLE_DEFAULT);
+
+        if (!updaterFile.exists()) {
+            this.fileIOOrError(updaterFile, updaterFile.mkdir(), true);
+        }
+
+        boolean createFile = !updaterConfigFile.exists();
+        try {
+            if (createFile) {
+                this.fileIOOrError(updaterConfigFile, updaterConfigFile.createNewFile(), true);
+                config.options().copyDefaults(true);
+                config.save(updaterConfigFile);
+            } else {
+                config.load(updaterConfigFile);
+            }
+        } catch (final Exception e) {
+            final String message;
+            if (createFile) {
+                message = "The updater could not create configuration at " + updaterFile.getAbsolutePath();
+            } else {
+                message = "The updater could not load configuration at " + updaterFile.getAbsolutePath();
+            }
+            this.plugin.getLogger().log(Level.SEVERE, message, e);
+        }
+
+        if (config.getBoolean(DISABLE_CONFIG_KEY)) {
+            this.result = UpdateResult.DISABLED;
+            return;
+        }
+
+        String key = config.getString(API_KEY_CONFIG_KEY);
+        if (API_KEY_DEFAULT.equalsIgnoreCase(key) || "".equals(key)) {
+            key = null;
+        }
+
+        this.apiKey = key;
 
         try {
             this.url = new URL(Updater.HOST + Updater.QUERY + this.id);

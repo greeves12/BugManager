@@ -3,6 +3,7 @@ package com.tatemylove.BugReport;
 import com.tatemylove.BugReport.Commands.MainCommand;
 import com.tatemylove.BugReport.Files.DataFile;
 import com.tatemylove.BugReport.Misc.Reminder;
+import com.tatemylove.BugReport.Updater.Updater;
 import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -13,7 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class Main extends JavaPlugin{
     public static String prefix = "§d[Bug§bManager] ";
-    public static String version = "RELEASE v1.2";
+    public static String version = "RELEASE v1.2.3";
     private static int startCountdownId;
     FileConfiguration config = getConfig();
     public static int timeUntilStart;
@@ -37,9 +38,9 @@ public class Main extends JavaPlugin{
         DataFile.setup(this);
         MainCommand cmd = new MainCommand();
         getCommand("bugreport").setExecutor(cmd);
-        if (getConfig().getBoolean("auto-update", true)) {
-            Updater updater = new Updater(this, 277007, this.getFile(), Updater.UpdateType.DEFAULT, true);
-        }
+        Updater update = new Updater(this, 277007, this.getFile(), Updater.UpdateType.DEFAULT, true);
+
+
     }
 
     public void startCountDown() {

@@ -26,10 +26,10 @@ public class Listeners implements Listener {
     }
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
-        Player p = e.getPlayer();
         if(e.getPlayer().hasPermission("bugreport.joinmes")){
+            Player p = e.getPlayer();
+            p.sendMessage(Main.prefix + "§cYou are running " + Main.version);
             this.plugin.checkUpdate(p);
-            p.sendMessage(Main.prefix + "§cYou are running version " + Main.version);
             p.sendMessage(Main.prefix + "§aTo update type /bugreport update");
         }
     }
@@ -51,7 +51,8 @@ public class Listeners implements Listener {
 
                     ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
                     BookMeta bm = (BookMeta) book.getItemMeta();
-                    bm.setPages(description);
+                    bm.setDisplayName("§dReport # " + k);
+                    bm.setPages("§dReport Number: " + k + "\n\n" +"§2Player: " + reports + "\n\n" +"§9Title: " + title + "\n\n" +"§6Description:" + "\n§0" + description);
                     bm.setTitle(title);
                     bm.setAuthor(reports);
                     book.setItemMeta(bm);
@@ -74,20 +75,26 @@ public class Listeners implements Listener {
         }
         for(int i = 54; DataFile.getData().contains("Reports." + i); i++){
             if(inventory.getName().equals(Reports.reportInv2.getName())){
-                if(e.getSlot() == i%54){
-                    String reports = DataFile.getData().getString("Reports." + i + ".Player");
-                    String title = DataFile.getData().getString("Reports." + i + ".Title");
-                    String description = DataFile.getData().getString("Reports." + i + ".Description");
-                    e.setCancelled(true);
-                    p.closeInventory();
+                if(e.getSlot() == i%54) {
+                    if (i < 99) {
+                        String reports = DataFile.getData().getString("Reports." + i + ".Player");
+                        String title = DataFile.getData().getString("Reports." + i + ".Title");
+                        String description = DataFile.getData().getString("Reports." + i + ".Description");
+                        e.setCancelled(true);
+                        p.closeInventory();
 
-                    ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
-                    BookMeta bm = (BookMeta) book.getItemMeta();
-                    bm.setPages(description);
-                    bm.setTitle(title);
-                    bm.setAuthor(reports);
-                    book.setItemMeta(bm);
-                    p.getInventory().addItem(book);
+                        ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
+                        BookMeta bm = (BookMeta) book.getItemMeta();
+                        bm.setDisplayName("§dReport # " +i);
+                        bm.setPages("§dReport Number: " + i + "\n\n" +"§2Player: " + reports + "\n\n" +"§9Title: " + title + "\n\n" +"§6Description:" + "\n§0" + description);
+                        bm.setTitle(title);
+                        bm.setAuthor(reports);
+                        book.setItemMeta(bm);
+                        p.getInventory().addItem(book);
+                        p.sendMessage(Main.prefix + "Received Report # " + "§d" + i);
+                    }else if(i == 99){
+                        break;
+                    }
                 }
             }
         }
@@ -96,6 +103,43 @@ public class Listeners implements Listener {
                 p.closeInventory();
                 Reports.createInv();
                 p.openInventory(Reports.reportInv);
+            }
+        }
+        if(inventory.getName().equalsIgnoreCase(Reports.reportInv2.getName())){
+            if(e.getSlot() == 53){
+                p.closeInventory();
+                Reports.createInv3();
+                p.openInventory(Reports.reportInv3);
+            }
+        }
+        if(inventory.getName().equalsIgnoreCase(Reports.reportInv3.getName())){
+            if(e.getSlot() == 45){
+                p.closeInventory();
+                Reports.createInv2();
+                p.openInventory(Reports.reportInv2);
+            }
+        }
+        for(int j = 99; DataFile.getData().contains("Reports." + j); j++ ){
+            if(inventory.getName().equals(Reports.reportInv3.getName())){
+                if(e.getSlot() == j%99){
+                    if(j < 144){
+                        String reports = DataFile.getData().getString("Reports." + j + ".Player");
+                        String title = DataFile.getData().getString("Reports." + j + ".Title");
+                        String description = DataFile.getData().getString("Reports." + j + ".Description");
+                        e.setCancelled(true);
+                        p.closeInventory();
+
+                        ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
+                        BookMeta bm = (BookMeta) book.getItemMeta();
+                        bm.setDisplayName("§dReport # " + j);
+                        bm.setPages("§dReport Number: " + j + "\n\n" +"§2Player: " + reports + "\n\n" +"§9Title: " + title + "\n\n" +"§6Description:" + "\n§0" + description);
+                        bm.setTitle(title);
+                        bm.setAuthor(reports);
+                        book.setItemMeta(bm);
+                        p.getInventory().addItem(book);
+                        p.sendMessage(Main.prefix + "Received Report # " + "§d" + j);
+                    }
+                }
             }
         }
     }

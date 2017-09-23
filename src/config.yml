@@ -4,7 +4,7 @@ reminder-interval: 300
 # Define the message you want to send to the players
 reminder-message: "&dIf you encounter a bug, please report it! \n&b/bugreport <title> <description>"
 
-# Disable or Enable auto updating
-auto-update: true
+# Edit the message you want to send them after they report a bug
+report-message: "&bThanks for reporting!"
 
 

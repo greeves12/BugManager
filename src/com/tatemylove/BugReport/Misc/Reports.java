@@ -4,6 +4,7 @@ import com.mysql.fabric.xmlrpc.base.Array;
 import com.tatemylove.BugReport.Files.DataFile;
 import com.tatemylove.BugReport.Main;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -19,11 +20,8 @@ public class Reports {
     public static int newID;
     public static Inventory reportInv = Bukkit.createInventory(null, 54, "§dReports Page 1:");
     public static Inventory reportInv2 = Bukkit.createInventory(null, 54, "§dReports Page 2:");
+    public static Inventory reportInv3 = Bukkit.createInventory(null, 54, "§dReports Page 3:");
     public int cooldown = 3000;
-    public static int j;
-    public ArrayList<Inventory> pages = new ArrayList<>();
-    public static ArrayList<ItemStack> items = new ArrayList<ItemStack>();
-    public static HashMap<Integer, Player> player = new HashMap<>();
 
 
     public static void fileReport(Player p, String title, String desc) {
@@ -95,7 +93,7 @@ public class Reports {
     public static void createInv2() {
 
         for (int i = 54; DataFile.getData().contains("Reports." + i); i++) {
-            if (i < 107) {
+            if (i < 99) {
                 String player = DataFile.getData().getString("Reports." + i + ".Player");
                 String title = DataFile.getData().getString("Reports." + i + ".Title");
                 ItemStack Stack = new ItemStack(Material.BOOK, 1);
@@ -107,7 +105,7 @@ public class Reports {
                 meta.setLore(lore);
                 Stack.setItemMeta(meta);
                 reportInv2.setItem(i % 54, Stack);
-            }else if(i==107){
+            }else if(i==99){
                 break;
             }
 
@@ -116,7 +114,41 @@ public class Reports {
         ItemMeta Meta = anvil.getItemMeta();
         Meta.setDisplayName("§bPrevious Page");
         anvil.setItemMeta(Meta);
+
+        ItemStack anvil2 = new ItemStack(Material.ANVIL, 1);
+        ItemMeta anvilMeta = anvil2.getItemMeta();
+        anvilMeta.setDisplayName("§bNext Page");
+        anvil2.setItemMeta(anvilMeta);
         reportInv2.setItem(45, anvil);
+        reportInv2.setItem(53, anvil2);
+    }
+
+    public static void createInv3(){
+        for (int j = 99; DataFile.getData().contains("Reports." + j); j++){
+            if(j < 144){
+                String player = DataFile.getData().getString("Reports." + j + ".Player");
+                String title = DataFile.getData().getString("Reports." + j + ".Title");
+                ItemStack Stack = new ItemStack(Material.BOOK, 1);
+                ItemMeta meta = Stack.getItemMeta();
+                ArrayList<String> lore = new ArrayList<String>();
+                meta.setDisplayName("§aReport Number: §d" + j);
+                lore.add(("By: " + player));
+                lore.add(("Title: " + title));
+                meta.setLore(lore);
+                Stack.setItemMeta(meta);
+                reportInv3.setItem(j % 99, Stack);
+            }else if(j == 144){
+                break;
+            }
+
+        }
+        ItemStack anvil = new ItemStack(Material.ANVIL, 1);
+        ItemMeta Meta = anvil.getItemMeta();
+        Meta.setDisplayName("§bPrevious Page");
+        anvil.setItemMeta(Meta);
+
+
+        reportInv3.setItem(45, anvil);
     }
 }
 

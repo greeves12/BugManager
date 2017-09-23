@@ -42,18 +42,18 @@ public class MainCommand implements CommandExecutor {
                             desc = desc + arg;
                         }
                         Reports.fileReport(p, title, desc);
-                        p.sendMessage(Main.prefix + "§bThanks for reporting!");
+                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + plugin.getConfig().getString("report-message")));
                         return true;
                     }
 
                 } else {
-                    p.sendMessage(Main.prefix + "§cNo access");
+                    p.sendMessage(Main.prefix + "§cYou don't have access to this command");
                 }
             }
             if (args[0].equalsIgnoreCase("help")) {
                 p.sendMessage("§b=-=-=-Bug-Manager-=-=-=-");
                 p.sendMessage("§d/bugreport help ~ Brings up the help section");
-                p.sendMessage("§d/bugreport create [Title] [Description] ~ Creates a bug report");
+                p.sendMessage("§2/bugreport create [Title] [Description] ~ Creates a bug report");
                 p.sendMessage("§b/bugreport view ~ Ingame viewing of bug reports");
                 p.sendMessage("§c/bugreport reload ~ Reloads the data yml file, always do this before viewing reports");
                 p.sendMessage(("§4/bugreport version ~ Checks the current version"));
@@ -65,6 +65,8 @@ public class MainCommand implements CommandExecutor {
                 if (p.hasPermission("bugreport.view")) {
                     DataFile.reloadData();
                     p.openInventory(Reports.reportInv);
+                }else{
+                    p.sendMessage(Main.prefix + "§cYou don't have access to this command!");
                 }
             }
             if (args[0].equalsIgnoreCase("reload")) {
@@ -72,6 +74,8 @@ public class MainCommand implements CommandExecutor {
                     p.sendMessage(Main.prefix + "§eDatabase reloaded!");
                     DataFile.saveData();
                     DataFile.reloadData();
+                }else{
+                    p.sendMessage(Main.prefix + "§cYou don't have access to this command");
                 }
             }
             if(args[0].equalsIgnoreCase(("version"))){
@@ -84,12 +88,16 @@ public class MainCommand implements CommandExecutor {
                         Reports.deleteReport(k);
                         p.sendMessage(Main.prefix + "§aReport deleted");
                     }
+                }else{
+                    p.sendMessage(Main.prefix + "§cYou don't have access to this command");
                 }
             }
             if(args[0].equalsIgnoreCase("update")) {
                 if (p.hasPermission("bugreport.update")) {
                     this.plugin.updatePlugin();
                     p.sendMessage(Main.prefix + "Update successfull! Changes will take action next server restart");
+                }else{
+                    p.sendMessage(Main.prefix + "§cYou don't have access to this command");
                 }
             }
             if(args[0].equalsIgnoreCase("check")){

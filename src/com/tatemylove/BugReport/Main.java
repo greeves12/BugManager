@@ -3,6 +3,7 @@ package com.tatemylove.BugReport;
 import com.tatemylove.BugReport.Commands.MainCommand;
 import com.tatemylove.BugReport.Files.DataFile;
 import com.tatemylove.BugReport.Misc.Reminder;
+import com.tatemylove.BugReport.Misc.Reports;
 import com.tatemylove.BugReport.Updater.Updater;
 import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
@@ -15,12 +16,14 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class Main extends JavaPlugin{
     public static String prefix = "§d[Bug§bManager] ";
-    public static String version = "RELEASE v1.2.5";
+    public static String version = "BugManager v1.2.6";
     private static int startCountdownId;
     FileConfiguration config = getConfig();
     public static int timeUntilStart;
 
+
     public void onEnable() {
+        Updater updater = new Updater(this, 277007, this.getFile(), Updater.UpdateType.NO_DOWNLOAD, false);
         startCountDown();
         ConsoleCommandSender cs = getServer().getConsoleSender();
         cs.sendMessage("§b=-=-=-Bug-Manager-=-=-=-");
@@ -28,6 +31,7 @@ public class Main extends JavaPlugin{
         cs.sendMessage("§6Do not claim this code as yours");
         cs.sendMessage("§6Altering this code, is an infringement under the copyright act");
         cs.sendMessage("§dYou are running version: " + version + " §aby: greeves12");
+        cs.sendMessage("§dLatest Download is " + updater.getLatestName());
         cs.sendMessage("§b=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
         Bukkit.getServer().getPluginManager().registerEvents(new Listeners(this), this);
         getConfig().options().copyDefaults(true);
@@ -36,11 +40,6 @@ public class Main extends JavaPlugin{
         DataFile.setup(this);
         MainCommand cmd = new MainCommand(this);
         getCommand("bugreport").setExecutor(cmd);
-        Updater updater = new Updater(this, 277007, this.getFile(), Updater.UpdateType.NO_DOWNLOAD, false);
-        if(updater.getResult() == Updater.UpdateResult.UPDATE_AVAILABLE){
-            cs.sendMessage("§dLatest Download is " + updater.getLatestName());
-        }
-
 
     }
     public void updatePlugin(){
@@ -61,8 +60,7 @@ public class Main extends JavaPlugin{
     }
     public void checkUpdate(Player p){
         Updater updater = new Updater(this, 277007, this.getFile(), Updater.UpdateType.NO_DOWNLOAD, false);
-        if(updater.getResult() == Updater.UpdateResult.UPDATE_AVAILABLE){
             p.sendMessage(Main.prefix + "§dLatest Download is " + updater.getLatestName());
-        }
+
     }
 }

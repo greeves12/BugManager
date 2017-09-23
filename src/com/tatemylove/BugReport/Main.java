@@ -14,7 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class Main extends JavaPlugin{
     public static String prefix = "§d[Bug§bManager] ";
-    public static String version = "RELEASE v1.2.3";
+    public static String version = "RELEASE v1.2.5";
     private static int startCountdownId;
     FileConfiguration config = getConfig();
     public static int timeUntilStart;

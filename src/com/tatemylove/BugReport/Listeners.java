@@ -22,52 +22,15 @@ public class Listeners implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
-        ItemStack clicked = e.getCurrentItem();
         Inventory inventory = e.getInventory();
 
-
-
-        if (inventory.getName().equals(Reports.reportInv.getName())) {
-            if (clicked.getType() == Material.BOOK) {
-                String reports = DataFile.getData().getString("Reports." + 0 + ".Player");
-                String title = DataFile.getData().getString("Reports." + 0 + ".Title");
-                String description = DataFile.getData().getString("Reports." + 0 + ".Description");
-                e.setCancelled(true);
-                p.closeInventory();
-
-                ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
-                BookMeta bm = (BookMeta) book.getItemMeta();
-                bm.setPages(description);
-                bm.setTitle(title);
-                bm.setAuthor(reports);
-                book.setItemMeta(bm);
-                p.getInventory().addItem(book);
-
-            }
-        }
-        if (inventory.getName().equals(Reports.reportInv.getName())) {
-            String reports = DataFile.getData().getString("Reports." + 1 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 1 + ".Title");
-            String description = DataFile.getData().getString("Reports." + 1 + ".Description");
-            if (clicked.getType() == Material.SAND) {
-                e.setCancelled(true);
-                p.closeInventory();
-
-                ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
-                BookMeta bm = (BookMeta) book.getItemMeta();
-                bm.setPages(description);
-                bm.setTitle(title);
-                bm.setAuthor(reports);
-                book.setItemMeta(bm);
-                p.getInventory().addItem(book);
-            }
-        }
-        if (inventory.getName().equals(Reports.reportInv.getName())) {
-            String reports = DataFile.getData().getString("Reports." + 2 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 2 + ".Title");
-            String description = DataFile.getData().getString("Reports." + 2 + ".Description");
-
-                if (clicked.getType() == Material.SADDLE) {
+        for (int k = 0; DataFile.getData().contains("Reports." + k); k++) {
+            if (inventory.getName().equals(Reports.reportInv.getName())) {
+                if(k < 53){
+                if (e.getSlot() == k) {
+                    String reports = DataFile.getData().getString("Reports." + k + ".Player");
+                    String title = DataFile.getData().getString("Reports." + k + ".Title");
+                    String description = DataFile.getData().getString("Reports." + k + ".Description");
                     e.setCancelled(true);
                     p.closeInventory();
 
@@ -78,15 +41,28 @@ public class Listeners implements Listener {
                     bm.setAuthor(reports);
                     book.setItemMeta(bm);
                     p.getInventory().addItem(book);
-
                 }
-            }
-            if(inventory.getName().equals(Reports.reportInv.getName())){
-                String reports = DataFile.getData().getString("Reports." + 3 + ".Player");
-                String title = DataFile.getData().getString("Reports." + 3 + ".Title");
-                String description = DataFile.getData().getString("Reports." + 3 + ".Description");
+            }else if (k == 53){
+                    break;
+                }
 
-                if (clicked.getType() == Material.SNOW_BALL) {
+
+        }
+        }
+        if(inventory.getName().equals(Reports.reportInv.getName())){
+            if(e.getSlot() == 53){
+                p.closeInventory();
+                Reports.createInv2();
+                p.openInventory(Reports.reportInv2);
+
+            }
+        }
+        for(int i = 54; DataFile.getData().contains("Reports." + i); i++){
+            if(inventory.getName().equals(Reports.reportInv2.getName())){
+                if(e.getSlot() == i%54){
+                    String reports = DataFile.getData().getString("Reports." + i + ".Player");
+                    String title = DataFile.getData().getString("Reports." + i + ".Title");
+                    String description = DataFile.getData().getString("Reports." + i + ".Description");
                     e.setCancelled(true);
                     p.closeInventory();
 
@@ -97,264 +73,15 @@ public class Listeners implements Listener {
                     bm.setAuthor(reports);
                     book.setItemMeta(bm);
                     p.getInventory().addItem(book);
-
                 }
             }
-        if(inventory.getName().equals(Reports.reportInv.getName())){
-            String reports = DataFile.getData().getString("Reports." + 4 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 4 + ".Title");
-            String description = DataFile.getData().getString("Reports." + 4 + ".Description");
-
-            if (clicked.getType() == Material.GHAST_TEAR) {
-                e.setCancelled(true);
+        }
+        if(inventory.getName().equals(Reports.reportInv2.getName())){
+            if(e.getSlot() == 45){
                 p.closeInventory();
-
-                ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
-                BookMeta bm = (BookMeta) book.getItemMeta();
-                bm.setPages(description);
-                bm.setTitle(title);
-                bm.setAuthor(reports);
-                book.setItemMeta(bm);
-                p.getInventory().addItem(book);
+                Reports.createInv();
+                p.openInventory(Reports.reportInv);
             }
         }
-        if(inventory.getName().equals(Reports.reportInv.getName())){
-            String reports = DataFile.getData().getString("Reports." + 5 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 5 + ".Title");
-            String description = DataFile.getData().getString("Reports." + 5 + ".Description");
-
-            if (clicked.getType() == Material.RED_ROSE) {
-                e.setCancelled(true);
-                p.closeInventory();
-
-                ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
-                BookMeta bm = (BookMeta) book.getItemMeta();
-                bm.setPages(description);
-                bm.setTitle(title);
-                bm.setAuthor(reports);
-                book.setItemMeta(bm);
-                p.getInventory().addItem(book);
-            }
-        }
-        if(inventory.getName().equals(Reports.reportInv.getName())){
-            String reports = DataFile.getData().getString("Reports." + 6 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 6 + ".Title");
-            String description = DataFile.getData().getString("Reports." + 6 + ".Description");
-
-            if (clicked.getType() == Material.REDSTONE) {
-                e.setCancelled(true);
-                p.closeInventory();
-
-                ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
-                BookMeta bm = (BookMeta) book.getItemMeta();
-                bm.setPages(description);
-                bm.setTitle(title);
-                bm.setAuthor(reports);
-                book.setItemMeta(bm);
-                p.getInventory().addItem(book);
-
-            }
-        }
-        if(inventory.getName().equals(Reports.reportInv.getName())){
-            String reports = DataFile.getData().getString("Reports." + 7 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 7 + ".Title");
-            String description = DataFile.getData().getString("Reports." + 7 + ".Description");
-
-            if (clicked.getType() == Material.GOLD_AXE) {
-                e.setCancelled(true);
-                p.closeInventory();
-
-                ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
-                BookMeta bm = (BookMeta) book.getItemMeta();
-                bm.setPages(description);
-                bm.setTitle(title);
-                bm.setAuthor(reports);
-                book.setItemMeta(bm);
-                p.getInventory().addItem(book);
-            }
-        }
-        if(inventory.getName().equals(Reports.reportInv.getName())){
-            String reports = DataFile.getData().getString("Reports." + 8 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 8 + ".Title");
-            String description = DataFile.getData().getString("Reports." + 8 + ".Description");
-
-            if (clicked.getType() == Material.NETHER_BRICK) {
-                e.setCancelled(true);
-                p.closeInventory();
-
-                ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
-                BookMeta bm = (BookMeta) book.getItemMeta();
-                bm.setPages(description);
-                bm.setTitle(title);
-                bm.setAuthor(reports);
-                book.setItemMeta(bm);
-                p.getInventory().addItem(book);
-
-            }
-        }
-        if(inventory.getName().equals(Reports.reportInv.getName())){
-            String reports = DataFile.getData().getString("Reports." + 9 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 9 + ".Title");
-            String description = DataFile.getData().getString("Reports." + 9 + ".Description");
-
-            if (clicked.getType() == Material.DIAMOND_PICKAXE) {
-                e.setCancelled(true);
-                p.closeInventory();
-
-                ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
-                BookMeta bm = (BookMeta) book.getItemMeta();
-                bm.setPages(description);
-                bm.setTitle(title);
-                bm.setAuthor(reports);
-                book.setItemMeta(bm);
-                p.getInventory().addItem(book);
-            }
-        }
-        if(inventory.getName().equals(Reports.reportInv.getName())){
-            String reports = DataFile.getData().getString("Reports." + 10 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 10 + ".Title");
-            String description = DataFile.getData().getString("Reports." + 10 + ".Description");
-
-            if (clicked.getType() == Material.DIAMOND) {
-                e.setCancelled(true);
-                p.closeInventory();
-
-                ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
-                BookMeta bm = (BookMeta) book.getItemMeta();
-                bm.setPages(description);
-                bm.setTitle(title);
-                bm.setAuthor(reports);
-                book.setItemMeta(bm);
-                p.getInventory().addItem(book);
-            }
-        }
-        if(inventory.getName().equals(Reports.reportInv.getName())){
-            String reports = DataFile.getData().getString("Reports." + 11 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 11 + ".Title");
-            String description = DataFile.getData().getString("Reports." + 11 + ".Description");
-
-            if (clicked.getType() == Material.GLOWSTONE_DUST) {
-                e.setCancelled(true);
-                p.closeInventory();
-
-                ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
-                BookMeta bm = (BookMeta) book.getItemMeta();
-                bm.setPages(description);
-                bm.setTitle(title);
-                bm.setAuthor(reports);
-                book.setItemMeta(bm);
-                p.getInventory().addItem(book);
-            }
-        }
-        if(inventory.getName().equals(Reports.reportInv.getName())){
-            String reports = DataFile.getData().getString("Reports." + 12 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 12 + ".Title");
-            String description = DataFile.getData().getString("Reports." + 12 + ".Description");
-
-            if (clicked.getType() == Material.MUSHROOM_SOUP) {
-                e.setCancelled(true);
-                p.closeInventory();
-
-                ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
-                BookMeta bm = (BookMeta) book.getItemMeta();
-                bm.setPages(description);
-                bm.setTitle(title);
-                bm.setAuthor(reports);
-                book.setItemMeta(bm);
-                p.getInventory().addItem(book);
-            }
-        }
-        if(inventory.getName().equals(Reports.reportInv.getName())){
-            String reports = DataFile.getData().getString("Reports." + 13 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 13 + ".Title");
-            String description = DataFile.getData().getString("Reports." + 13 + ".Description");
-
-            if (clicked.getType() == Material.QUARTZ) {
-                e.setCancelled(true);
-                p.closeInventory();
-
-                ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
-                BookMeta bm = (BookMeta) book.getItemMeta();
-                bm.setPages(description);
-                bm.setTitle(title);
-                bm.setAuthor(reports);
-                book.setItemMeta(bm);
-                p.getInventory().addItem(book);
-            }
-        }
-        if(inventory.getName().equals(Reports.reportInv.getName())){
-            String reports = DataFile.getData().getString("Reports." + 14 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 14 + ".Title");
-            String description = DataFile.getData().getString("Reports." + 14 + ".Description");
-
-            if (clicked.getType() == Material.LAPIS_ORE) {
-                e.setCancelled(true);
-                p.closeInventory();
-
-                ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
-                BookMeta bm = (BookMeta) book.getItemMeta();
-                bm.setPages(description);
-                bm.setTitle(title);
-                bm.setAuthor(reports);
-                book.setItemMeta(bm);
-                p.getInventory().addItem(book);
-            }
-        }
-        if(inventory.getName().equals(Reports.reportInv.getName())){
-            String reports = DataFile.getData().getString("Reports." + 15 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 15 + ".Title");
-            String description = DataFile.getData().getString("Reports." + 15 + ".Description");
-
-            if (clicked.getType() == Material.PAPER) {
-                e.setCancelled(true);
-                p.closeInventory();
-
-                ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
-                BookMeta bm = (BookMeta) book.getItemMeta();
-                bm.setPages(description);
-                bm.setTitle(title);
-                bm.setAuthor(reports);
-                book.setItemMeta(bm);
-                p.getInventory().addItem(book);
-            }
-        }
-        if(inventory.getName().equals(Reports.reportInv.getName())){
-            String reports = DataFile.getData().getString("Reports." + 16 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 16 + ".Title");
-            String description = DataFile.getData().getString("Reports." + 16 + ".Description");
-
-            if (clicked.getType() == Material.SAPLING) {
-                e.setCancelled(true);
-                p.closeInventory();
-
-                ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
-                BookMeta bm = (BookMeta) book.getItemMeta();
-                bm.setPages(description);
-                bm.setTitle(title);
-                bm.setAuthor(reports);
-                book.setItemMeta(bm);
-                p.getInventory().addItem(book);
-            }
-        }
-        if(inventory.getName().equals(Reports.reportInv.getName())){
-            String reports = DataFile.getData().getString("Reports." + 17 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 17 + ".Title");
-            String description = DataFile.getData().getString("Reports." + 17 + ".Description");
-
-            if (clicked.getType() == Material.INK_SACK) {
-                e.setCancelled(true);
-                p.closeInventory();
-
-                ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
-                BookMeta bm = (BookMeta) book.getItemMeta();
-                bm.setPages(description);
-                bm.setTitle(title);
-                bm.setAuthor(reports);
-                book.setItemMeta(bm);
-                p.getInventory().addItem(book);
-
-            }
-        }
-        }
-
     }
+}

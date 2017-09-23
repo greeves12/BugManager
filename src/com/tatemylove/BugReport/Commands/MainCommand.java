@@ -48,13 +48,13 @@ public class MainCommand implements CommandExecutor {
             }
             if (args[0].equalsIgnoreCase("help")) {
                 p.sendMessage("§b=-=-=-Bug-Manager-=-=-=-");
-                p.sendMessage("§aBug Manager Help Section");
                 p.sendMessage("§d/bugreport help ~ Brings up the help section");
                 p.sendMessage("§d/bugreport create [Title] [Description] ~ Creates a bug report");
                 p.sendMessage("§b/bugreport view ~ Ingame viewing of bug reports");
                 p.sendMessage("§c/bugreport reload ~ Reloads the data yml file, always do this before viewing reports");
                 p.sendMessage(("§4/bugreport version ~ Checks the current version"));
-                p.sendMessage("§b=-=-=--=-=-=-");
+                p.sendMessage("§6/bugreport delete <ID> ~ Deletes the report with the ID (Example: /bugreport delete 0)");
+                p.sendMessage("§b=-=-=--=-=-=-=-=-=-=-=-=-");
             }
             if (args[0].equalsIgnoreCase("view")) {
                 if (p.hasPermission("bugreport.view")) {
@@ -71,6 +71,15 @@ public class MainCommand implements CommandExecutor {
             }
             if(args[0].equalsIgnoreCase(("version"))){
                 p.sendMessage(Main.prefix + "§aRunning version " + Main.version);
+            }
+            if(args[0].equalsIgnoreCase("delete")){
+                if(p.hasPermission("bugreport.delete")){
+                    if(args.length >= 2){
+                        int k = Integer.parseInt(args[1]);
+                        Reports.deleteReport(k);
+                        p.sendMessage(Main.prefix + "§aReport deleted");
+                    }
+                }
             }
 
         }

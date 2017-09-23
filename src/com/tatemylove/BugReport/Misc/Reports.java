@@ -1,6 +1,8 @@
 package com.tatemylove.BugReport.Misc;
 
+import com.mysql.fabric.xmlrpc.base.Array;
 import com.tatemylove.BugReport.Files.DataFile;
+import com.tatemylove.BugReport.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -8,18 +10,20 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * Created by Tate on 9/3/2017.
  */
 public class Reports {
     public static int newID;
-    public static Inventory reportInv = Bukkit.createInventory(null, 18, "§dReports:");
+    public static Inventory reportInv = Bukkit.createInventory(null, 54, "§dReports Page 1:");
+    public static Inventory reportInv2 = Bukkit.createInventory(null, 54, "§dReports Page 2:");
     public int cooldown = 3000;
-
+    public static int j;
+    public ArrayList<Inventory> pages = new ArrayList<>();
+    public static ArrayList<ItemStack> items = new ArrayList<ItemStack>();
+    public static HashMap<Integer, Player> player = new HashMap<>();
 
 
     public static void fileReport(Player p, String title, String desc) {
@@ -41,9 +45,11 @@ public class Reports {
         DataFile.reloadData();
 
     }
-        public static void createBook() {
-            String player = DataFile.getData().getString("Reports." + 0 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 0 + ".Title");
+
+    public static void deleteReport(int k) {
+        if (DataFile.getData().contains("Reports." + k)) {
+            String player = DataFile.getData().getString("Reports." + k + ".Player");
+            String title = DataFile.getData().getString("Reports." + k + ".Title");
             ItemStack stack = new ItemStack(Material.BOOK, 1);
             ItemMeta meta = stack.getItemMeta();
             ArrayList<String> lore = new ArrayList<String>();
@@ -51,219 +57,67 @@ public class Reports {
             lore.add(("Title: " + title));
             meta.setLore(lore);
             stack.setItemMeta(meta);
-            reportInv.setItem(0, stack);
+            DataFile.getData().set("Reports." + k, null);
+            DataFile.saveData();
+            DataFile.reloadData();
+            reportInv.setItem(k, null);
         }
-        public static void createSand() {
-            String player = DataFile.getData().getString("Reports." + 1 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 1 + ".Title");
-            ItemStack stack = new ItemStack(Material.SAND, 1);
-            ItemMeta meta = stack.getItemMeta();
-            ArrayList<String> lore = new ArrayList<String>();
-            lore.add(("By: " + player));
-            lore.add(("Title: " + title));
-            meta.setLore(lore);
-            stack.setItemMeta(meta);
-            reportInv.setItem(1, stack);
-        }
-        public static void createSaddle(){
-            String player = DataFile.getData().getString("Reports." + 2 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 2 + ".Title");
-            ItemStack stack = new ItemStack(Material.SADDLE, 1);
-            ItemMeta meta = stack.getItemMeta();
-            ArrayList<String> lore = new ArrayList<String>();
-            lore.add(("By: " + player));
-            lore.add(("Title: " + title));
-            meta.setLore(lore);
-            stack.setItemMeta(meta);
-            reportInv.setItem(2, stack);
-        }
-        public static void snowBall(){
-            String player = DataFile.getData().getString("Reports." + 3 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 3 + ".Title");
-            ItemStack stack = new ItemStack(Material.SNOW_BALL, 1);
-            ItemMeta meta = stack.getItemMeta();
-            ArrayList<String> lore = new ArrayList<String>();
-            lore.add(("By: " + player));
-            lore.add(("Title: " + title));
-            meta.setLore(lore);
-            stack.setItemMeta(meta);
-            reportInv.setItem(3, stack);
-        }
-        public static void ghastTear(){
-            String player = DataFile.getData().getString("Reports." + 4 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 4 + ".Title");
-            ItemStack stack = new ItemStack(Material.GHAST_TEAR, 1);
-            ItemMeta meta = stack.getItemMeta();
-            ArrayList<String> lore = new ArrayList<String>();
-            lore.add(("By: " + player));
-            lore.add(("Title: " + title));
-            meta.setLore(lore);
-            stack.setItemMeta(meta);
-            reportInv.setItem(4, stack);
-        }
-        public static void roseRed(){
-            String player = DataFile.getData().getString("Reports." + 5 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 5 + ".Title");
-            ItemStack stack = new ItemStack(Material.RED_ROSE, 1);
-            ItemMeta meta = stack.getItemMeta();
-            ArrayList<String> lore = new ArrayList<String>();
-            lore.add(("By: " + player));
-            lore.add(("Title: " + title));
-            meta.setLore(lore);
-            stack.setItemMeta(meta);
-            reportInv.setItem(5, stack);
-        }
-        public static void redStone(){
-            String player = DataFile.getData().getString("Reports." + 6 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 6 + ".Title");
-            ItemStack stack = new ItemStack(Material.REDSTONE, 1);
-            ItemMeta meta = stack.getItemMeta();
-            ArrayList<String> lore = new ArrayList<String>();
-            lore.add(("By: " + player));
-            lore.add(("Title: " + title));
-            meta.setLore(lore);
-            stack.setItemMeta(meta);
-            reportInv.setItem(6, stack);
-        }
-        public static void goldAxe(){
-            String player = DataFile.getData().getString("Reports." + 7 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 7 + ".Title");
-            ItemStack stack = new ItemStack(Material.GOLD_AXE, 1);
-            ItemMeta meta = stack.getItemMeta();
-            ArrayList<String> lore = new ArrayList<String>();
-            lore.add(("By: " + player));
-            lore.add(("Title: " + title));
-            meta.setLore(lore);
-            stack.setItemMeta(meta);
-            reportInv.setItem(7, stack);
-        }
-        public static void netherBrick(){
-            String player = DataFile.getData().getString("Reports." + 8 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 8 + ".Title");
-            ItemStack stack = new ItemStack(Material.NETHER_BRICK, 1);
-            ItemMeta meta = stack.getItemMeta();
-            ArrayList<String> lore = new ArrayList<String>();
-            lore.add(("By: " + player));
-            lore.add(("Title: " + title));
-            meta.setLore(lore);
-            stack.setItemMeta(meta);
-            reportInv.setItem(8, stack);
-        }
-        public static void diamondPickaxe(){
-            String player = DataFile.getData().getString("Reports." + 9 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 9 + ".Title");
-            ItemStack stack = new ItemStack(Material.DIAMOND_PICKAXE, 1);
-            ItemMeta meta = stack.getItemMeta();
-            ArrayList<String> lore = new ArrayList<String>();
-            lore.add(("By: " + player));
-            lore.add(("Title: " + title));
-            meta.setLore(lore);
-            stack.setItemMeta(meta);
-            reportInv.setItem(9, stack);
-        }
-        public static void diamond(){
-            String player = DataFile.getData().getString("Reports." + 10 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 10 + ".Title");
-            ItemStack stack = new ItemStack(Material.DIAMOND, 1);
-            ItemMeta meta = stack.getItemMeta();
-            ArrayList<String> lore = new ArrayList<String>();
-            lore.add(("By: " + player));
-            lore.add(("Title: " + title));
-            meta.setLore(lore);
-            stack.setItemMeta(meta);
-            reportInv.setItem(10, stack);
-        }
-        public static void glowStone(){
-            String player = DataFile.getData().getString("Reports." + 11 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 11 + ".Title");
-            ItemStack stack = new ItemStack(Material.GLOWSTONE_DUST, 1);
-            ItemMeta meta = stack.getItemMeta();
-            ArrayList<String> lore = new ArrayList<String>();
-            lore.add(("By: " + player));
-            lore.add(("Title: " + title));
-            meta.setLore(lore);
-            stack.setItemMeta(meta);
-            reportInv.setItem(11, stack);
-        }
-        public static void mushroomSoup(){
-            String player = DataFile.getData().getString("Reports." + 12 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 12 + ".Title");
-            ItemStack stack = new ItemStack(Material.MUSHROOM_SOUP, 1);
-            ItemMeta meta = stack.getItemMeta();
-            ArrayList<String> lore = new ArrayList<String>();
-            lore.add(("By: " + player));
-            lore.add(("Title: " + title));
-            meta.setLore(lore);
-            stack.setItemMeta(meta);
-            reportInv.setItem(12, stack);
-        }
-        public static void quartz(){
-            String player = DataFile.getData().getString("Reports." + 13 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 13 + ".Title");
-            ItemStack stack = new ItemStack(Material.QUARTZ, 1);
-            ItemMeta meta = stack.getItemMeta();
-            ArrayList<String> lore = new ArrayList<String>();
-            lore.add(("By: " + player));
-            lore.add(("Title: " + title));
-            meta.setLore(lore);
-            stack.setItemMeta(meta);
-            reportInv.setItem(13, stack);
-        }
-        public static void lapisOre(){
-            String player = DataFile.getData().getString("Reports." + 14 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 14 + ".Title");
-            ItemStack stack = new ItemStack(Material.LAPIS_ORE, 1);
-            ItemMeta meta = stack.getItemMeta();
-            ArrayList<String> lore = new ArrayList<String>();
-            lore.add(("By: " + player));
-            lore.add(("Title: " + title));
-            meta.setLore(lore);
-            stack.setItemMeta(meta);
-            reportInv.setItem(14, stack);
-        }
-        public static void paper(){
-            String player = DataFile.getData().getString("Reports." + 15 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 15 + ".Title");
-            ItemStack stack = new ItemStack(Material.PAPER, 1);
-            ItemMeta meta = stack.getItemMeta();
-            ArrayList<String> lore = new ArrayList<String>();
-            lore.add(("By: " + player));
-            lore.add(("Title: " + title));
-            meta.setLore(lore);
-            stack.setItemMeta(meta);
-            reportInv.setItem(15, stack);
-        }
-        public static void sapling(){
-            String player = DataFile.getData().getString("Reports." + 16 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 16 + ".Title");
-            ItemStack stack = new ItemStack(Material.SAPLING, 1);
-            ItemMeta meta = stack.getItemMeta();
-            ArrayList<String> lore = new ArrayList<String>();
-            lore.add(("By: " + player));
-            lore.add(("Title: " + title));
-            meta.setLore(lore);
-            stack.setItemMeta(meta);
-            reportInv.setItem(16, stack);
-        }
-        public static void inkSack(){
-            String player = DataFile.getData().getString("Reports." + 17 + ".Player");
-            String title = DataFile.getData().getString("Reports." + 17 + ".Title");
-            ItemStack stack = new ItemStack(Material.INK_SACK, 1);
-            ItemMeta meta = stack.getItemMeta();
-            ArrayList<String> lore = new ArrayList<String>();
-            lore.add(("By: " + player));
-            lore.add(("Title: " + title));
-            meta.setLore(lore);
-            stack.setItemMeta(meta);
-            reportInv.setItem(17, stack);
-
-
-        }
-
-
-}
-    /*public static void viewReports(){
-        ArrayList<Integer> numbers = new ArrayList<>();
 
     }
-}*/
+
+    public static void createInv() {
+        for (int k = 0; DataFile.getData().contains("Reports." + k); k++) {
+
+            if (k < 53) {
+                String player = DataFile.getData().getString("Reports." + k + ".Player");
+                String title = DataFile.getData().getString("Reports." + k + ".Title");
+                ItemStack stack = new ItemStack(Material.BOOK, 1);
+                ItemMeta meta = stack.getItemMeta();
+                ArrayList<String> lore = new ArrayList<String>();
+                meta.setDisplayName("§aReport Number: §d" + k);
+                lore.add(("By: " + player));
+                lore.add(("Title: " + title));
+                meta.setLore(lore);
+                stack.setItemMeta(meta);
+                reportInv.setItem(k, stack);
+
+            } else if (k == 53) {
+                break;
+            }
+        }
+        ItemStack anvil = new ItemStack(Material.ANVIL, 1);
+        ItemMeta Meta = anvil.getItemMeta();
+        Meta.setDisplayName("§bNext Page");
+        anvil.setItemMeta(Meta);
+        reportInv.setItem(53, anvil);
+    }
+
+    public static void createInv2() {
+
+        for (int i = 54; DataFile.getData().contains("Reports." + i); i++) {
+            if (i < 107) {
+                String player = DataFile.getData().getString("Reports." + i + ".Player");
+                String title = DataFile.getData().getString("Reports." + i + ".Title");
+                ItemStack Stack = new ItemStack(Material.BOOK, 1);
+                ItemMeta meta = Stack.getItemMeta();
+                ArrayList<String> lore = new ArrayList<String>();
+                meta.setDisplayName("§aReport Number: §d" + i);
+                lore.add(("By: " + player));
+                lore.add(("Title: " + title));
+                meta.setLore(lore);
+                Stack.setItemMeta(meta);
+                reportInv2.setItem(i % 54, Stack);
+            }else if(i==107){
+                break;
+            }
+
+        }
+        ItemStack anvil = new ItemStack(Material.ANVIL, 1);
+        ItemMeta Meta = anvil.getItemMeta();
+        Meta.setDisplayName("§bPrevious Page");
+        anvil.setItemMeta(Meta);
+        reportInv2.setItem(45, anvil);
+    }
+}
+
+

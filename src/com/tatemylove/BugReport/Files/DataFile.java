@@ -60,24 +60,7 @@ public class DataFile
     public static void reloadData()
     {
         bug = YamlConfiguration.loadConfiguration(afile);
-        Reports.createBook();
-        Reports.createSaddle();
-        Reports.createSand();
-        Reports.sapling();
-        Reports.snowBall();
-        Reports.glowStone();
-        Reports.redStone();
-        Reports.diamond();
-        Reports.diamondPickaxe();
-        Reports.goldAxe();
-        Reports.roseRed();
-        Reports.ghastTear();
-        Reports.netherBrick();
-        Reports.mushroomSoup();
-        Reports.quartz();
-        Reports.lapisOre();
-        Reports.paper();
-        Reports.inkSack();
+        Reports.createInv();
 
 
     }

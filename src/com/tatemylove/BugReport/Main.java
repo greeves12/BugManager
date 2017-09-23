@@ -7,6 +7,7 @@ import com.tatemylove.BugReport.Updater.Updater;
 import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -20,8 +21,6 @@ public class Main extends JavaPlugin{
     public static int timeUntilStart;
 
     public void onEnable() {
-
-        Bukkit.getServer().getPluginManager().registerEvents(new Listeners(), this);
         startCountDown();
         ConsoleCommandSender cs = getServer().getConsoleSender();
         cs.sendMessage("§b=-=-=-Bug-Manager-=-=-=-");
@@ -30,17 +29,22 @@ public class Main extends JavaPlugin{
         cs.sendMessage("§6Altering this code, is an infringement under the copyright act");
         cs.sendMessage("§dYou are running version: " + version + " §aby: greeves12");
         cs.sendMessage("§b=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
-
-
+        Bukkit.getServer().getPluginManager().registerEvents(new Listeners(this), this);
         getConfig().options().copyDefaults(true);
         saveDefaultConfig();
 
         DataFile.setup(this);
-        MainCommand cmd = new MainCommand();
+        MainCommand cmd = new MainCommand(this);
         getCommand("bugreport").setExecutor(cmd);
-        Updater update = new Updater(this, 277007, this.getFile(), Updater.UpdateType.DEFAULT, true);
+        Updater updater = new Updater(this, 277007, this.getFile(), Updater.UpdateType.NO_DOWNLOAD, false);
+        if(updater.getResult() == Updater.UpdateResult.UPDATE_AVAILABLE){
+            cs.sendMessage("§dLatest Download is " + updater.getLatestName());
+        }
 
 
+    }
+    public void updatePlugin(){
+        Updater updater = new Updater(this, 277007, this.getFile(), Updater.UpdateType.NO_VERSION_CHECK, true);
     }
 
     public void startCountDown() {
@@ -53,5 +57,12 @@ public class Main extends JavaPlugin{
     public void restartCountdown(){
         stopCountDown();
         startCountDown();
+
+    }
+    public void checkUpdate(Player p){
+        Updater updater = new Updater(this, 277007, this.getFile(), Updater.UpdateType.NO_DOWNLOAD, false);
+        if(updater.getResult() == Updater.UpdateResult.UPDATE_AVAILABLE){
+            p.sendMessage(Main.prefix + "§dLatest Download is " + updater.getLatestName());
+        }
     }
 }

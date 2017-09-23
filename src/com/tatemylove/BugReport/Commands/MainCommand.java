@@ -3,6 +3,7 @@ package com.tatemylove.BugReport.Commands;
 import com.tatemylove.BugReport.Files.DataFile;
 import com.tatemylove.BugReport.Main;
 import com.tatemylove.BugReport.Misc.Reports;
+import com.tatemylove.BugReport.Updater.Updater;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -16,6 +17,9 @@ import java.util.StringJoiner;
  */
 public class MainCommand implements CommandExecutor {
     Main plugin;
+    public MainCommand(Main pl){
+        plugin = pl;
+    }
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
 
@@ -54,6 +58,7 @@ public class MainCommand implements CommandExecutor {
                 p.sendMessage("§c/bugreport reload ~ Reloads the data yml file, always do this before viewing reports");
                 p.sendMessage(("§4/bugreport version ~ Checks the current version"));
                 p.sendMessage("§6/bugreport delete <ID> ~ Deletes the report with the ID (Example: /bugreport delete 0)");
+                p.sendMessage("§a/bugreport update ~ Updates the plugin");
                 p.sendMessage("§b=-=-=--=-=-=-=-=-=-=-=-=-");
             }
             if (args[0].equalsIgnoreCase("view")) {
@@ -80,6 +85,16 @@ public class MainCommand implements CommandExecutor {
                         p.sendMessage(Main.prefix + "§aReport deleted");
                     }
                 }
+            }
+            if(args[0].equalsIgnoreCase("update")) {
+                if (p.hasPermission("bugreport.update")) {
+                    this.plugin.updatePlugin();
+                    p.sendMessage(Main.prefix + "Update successfull! Changes will take action next server restart");
+                }
+            }
+            if(args[0].equalsIgnoreCase("check")){
+                this.plugin.checkUpdate(p);
+                p.sendMessage(Main.prefix + "§cYou are running version " + Main.version);
             }
 
         }

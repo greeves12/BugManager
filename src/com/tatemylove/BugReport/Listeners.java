@@ -40,7 +40,7 @@ public class Listeners implements Listener {
         Inventory inventory = e.getInventory();
 
         for (int k = 0; DataFile.getData().contains("Reports." + k); k++) {
-            if (inventory.getName().equals(Reports.reportInv.getName())) {
+            if (inventory.getName().equals(Main.reportInv.getName())) {
                 if(k < 53){
                 if (e.getSlot() == k) {
                     String reports = DataFile.getData().getString("Reports." + k + ".Player");
@@ -65,16 +65,16 @@ public class Listeners implements Listener {
 
         }
         }
-        if(inventory.getName().equals(Reports.reportInv.getName())){
+        if(inventory.getName().equals(Main.reportInv.getName())){
             if(e.getSlot() == 53){
                 p.closeInventory();
                 Reports.createInv2();
-                p.openInventory(Reports.reportInv2);
+                p.openInventory(Main.reportInv2);
 
             }
         }
         for(int i = 54; DataFile.getData().contains("Reports." + i); i++){
-            if(inventory.getName().equals(Reports.reportInv2.getName())){
+            if(inventory.getName().equals(Main.reportInv2.getName())){
                 if(e.getSlot() == i%54) {
                     if (i < 99) {
                         String reports = DataFile.getData().getString("Reports." + i + ".Player");
@@ -98,29 +98,29 @@ public class Listeners implements Listener {
                 }
             }
         }
-        if(inventory.getName().equals(Reports.reportInv2.getName())){
+        if(inventory.getName().equals(Main.reportInv2.getName())){
             if(e.getSlot() == 45){
                 p.closeInventory();
                 Reports.createInv();
-                p.openInventory(Reports.reportInv);
+                p.openInventory(Main.reportInv);
             }
         }
-        if(inventory.getName().equalsIgnoreCase(Reports.reportInv2.getName())){
+        if(inventory.getName().equalsIgnoreCase(Main.reportInv2.getName())){
             if(e.getSlot() == 53){
                 p.closeInventory();
                 Reports.createInv3();
-                p.openInventory(Reports.reportInv3);
+                p.openInventory(Main.reportInv3);
             }
         }
-        if(inventory.getName().equalsIgnoreCase(Reports.reportInv3.getName())){
+        if(inventory.getName().equalsIgnoreCase(Main.reportInv3.getName())){
             if(e.getSlot() == 45){
                 p.closeInventory();
                 Reports.createInv2();
-                p.openInventory(Reports.reportInv2);
+                p.openInventory(Main.reportInv2);
             }
         }
         for(int j = 99; DataFile.getData().contains("Reports." + j); j++ ){
-            if(inventory.getName().equals(Reports.reportInv3.getName())){
+            if(inventory.getName().equals(Main.reportInv3.getName())){
                 if(e.getSlot() == j%99){
                     if(j < 144){
                         String reports = DataFile.getData().getString("Reports." + j + ".Player");

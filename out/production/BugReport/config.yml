@@ -7,4 +7,11 @@ reminder-message: "&dIf you encounter a bug, please report it! \n&b/bugreport <t
 # Edit the message you want to send them after they report a bug
 report-message: "&bThanks for reporting!"
 
+#Change the message after a delete is perfomed
+delete-message: "§aReport deleted"
 
+#Change the message for player without sufficient permissions
+noperm-message: "§cYou don't have access to this command!"
+
+#Enable or Disable auto update
+auto-update: true

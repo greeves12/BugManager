@@ -1,5 +1,5 @@
 name: BugReport
-version: 1.2.6
+version: 1.2.8
 author: tatemylove
 main: com.tatemylove.BugReport.Main
 commands:

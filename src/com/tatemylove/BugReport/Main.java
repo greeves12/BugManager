@@ -9,6 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -16,14 +17,19 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class Main extends JavaPlugin{
     public static String prefix = "§d[Bug§bManager] ";
-    public static String version = "BugManager v1.2.6";
+    public static String version = "BugManager v1.2.8";
     private static int startCountdownId;
-    FileConfiguration config = getConfig();
     public static int timeUntilStart;
-
+    public static Inventory reportInv = Bukkit.createInventory(null, 54, "§dReports Page 1:");
+    public static Inventory reportInv2 = Bukkit.createInventory(null, 54, "§dReports Page 2:");
+    public static Inventory reportInv3 = Bukkit.createInventory(null, 54, "§dReports Page 3:");
 
     public void onEnable() {
-        Updater updater = new Updater(this, 277007, this.getFile(), Updater.UpdateType.NO_DOWNLOAD, false);
+        if(getConfig().getBoolean("auto-update") == true){
+            Updater updater = new Updater(this, 277007, this.getFile(), Updater.UpdateType.DEFAULT, true);
+        }
+
+            Updater updater = new Updater(this, 277007, this.getFile(), Updater.UpdateType.NO_DOWNLOAD, false);
         startCountDown();
         ConsoleCommandSender cs = getServer().getConsoleSender();
         cs.sendMessage("§b=-=-=-Bug-Manager-=-=-=-");

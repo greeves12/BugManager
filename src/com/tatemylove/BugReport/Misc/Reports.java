@@ -18,9 +18,6 @@ import java.util.*;
  */
 public class Reports {
     public static int newID;
-    public static Inventory reportInv = Bukkit.createInventory(null, 54, "§dReports Page 1:");
-    public static Inventory reportInv2 = Bukkit.createInventory(null, 54, "§dReports Page 2:");
-    public static Inventory reportInv3 = Bukkit.createInventory(null, 54, "§dReports Page 3:");
     public int cooldown = 3000;
 
 
@@ -58,7 +55,7 @@ public class Reports {
             DataFile.getData().set("Reports." + k, null);
             DataFile.saveData();
             DataFile.reloadData();
-            reportInv.setItem(k, null);
+            Main.reportInv.setItem(k, null);
         }
 
     }
@@ -77,7 +74,7 @@ public class Reports {
                 lore.add(("Title: " + title));
                 meta.setLore(lore);
                 stack.setItemMeta(meta);
-                reportInv.setItem(k, stack);
+                Main.reportInv.setItem(k, stack);
 
             } else if (k == 53) {
                 break;
@@ -87,7 +84,7 @@ public class Reports {
         ItemMeta Meta = anvil.getItemMeta();
         Meta.setDisplayName("§bNext Page");
         anvil.setItemMeta(Meta);
-        reportInv.setItem(53, anvil);
+        Main.reportInv.setItem(53, anvil);
     }
 
     public static void createInv2() {
@@ -104,7 +101,7 @@ public class Reports {
                 lore.add(("Title: " + title));
                 meta.setLore(lore);
                 Stack.setItemMeta(meta);
-                reportInv2.setItem(i % 54, Stack);
+                Main.reportInv2.setItem(i % 54, Stack);
             }else if(i==99){
                 break;
             }
@@ -119,8 +116,8 @@ public class Reports {
         ItemMeta anvilMeta = anvil2.getItemMeta();
         anvilMeta.setDisplayName("§bNext Page");
         anvil2.setItemMeta(anvilMeta);
-        reportInv2.setItem(45, anvil);
-        reportInv2.setItem(53, anvil2);
+        Main.reportInv2.setItem(45, anvil);
+        Main.reportInv2.setItem(53, anvil2);
     }
 
     public static void createInv3(){
@@ -136,7 +133,7 @@ public class Reports {
                 lore.add(("Title: " + title));
                 meta.setLore(lore);
                 Stack.setItemMeta(meta);
-                reportInv3.setItem(j % 99, Stack);
+                Main.reportInv3.setItem(j % 99, Stack);
             }else if(j == 144){
                 break;
             }
@@ -148,7 +145,7 @@ public class Reports {
         anvil.setItemMeta(Meta);
 
 
-        reportInv3.setItem(45, anvil);
+        Main.reportInv3.setItem(45, anvil);
     }
 }
 

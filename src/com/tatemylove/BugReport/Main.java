@@ -2,14 +2,18 @@ package com.tatemylove.BugReport;
 
 import com.tatemylove.BugReport.Commands.MainCommand;
 import com.tatemylove.BugReport.Files.DataFile;
+import com.tatemylove.BugReport.Misc.ConfigEditor;
 import com.tatemylove.BugReport.Misc.Reminder;
 import com.tatemylove.BugReport.Misc.Reports;
 import com.tatemylove.BugReport.Updater.Updater;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -23,6 +27,7 @@ public class Main extends JavaPlugin{
     public static Inventory reportInv = Bukkit.createInventory(null, 54, "§dReports Page 1:");
     public static Inventory reportInv2 = Bukkit.createInventory(null, 54, "§dReports Page 2:");
     public static Inventory reportInv3 = Bukkit.createInventory(null, 54, "§dReports Page 3:");
+
 
     public void onEnable() {
         if(getConfig().getBoolean("auto-update") == true){
@@ -40,6 +45,7 @@ public class Main extends JavaPlugin{
         cs.sendMessage("§dLatest Download is " + updater.getLatestName());
         cs.sendMessage("§b=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
         Bukkit.getServer().getPluginManager().registerEvents(new Listeners(this), this);
+
         getConfig().options().copyDefaults(true);
         saveDefaultConfig();
 
@@ -62,11 +68,16 @@ public class Main extends JavaPlugin{
     public void restartCountdown(){
         stopCountDown();
         startCountDown();
-
     }
     public void checkUpdate(Player p){
         Updater updater = new Updater(this, 277007, this.getFile(), Updater.UpdateType.NO_DOWNLOAD, false);
             p.sendMessage(Main.prefix + "§dLatest Download is " + updater.getLatestName());
-
+    }
+    public void createReminder(){
+        ItemStack one = new ItemStack(Material.ENDER_CHEST, 1);
+        ItemMeta oneMeta = one.getItemMeta();
+        oneMeta.setDisplayName("§aCurrent Setting: §5"  + this.getConfig().getInt("reminder-interval"));
+        one.setItemMeta(oneMeta);
+        ConfigEditor.configReminder.setItem(4, one);
     }
 }

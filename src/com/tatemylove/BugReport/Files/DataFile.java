@@ -1,5 +1,7 @@
 package com.tatemylove.BugReport.Files;
 
+import com.tatemylove.BugReport.Main;
+import com.tatemylove.BugReport.Misc.ConfigEditor;
 import com.tatemylove.BugReport.Misc.Reports;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -16,6 +18,7 @@ import java.io.IOException;
  */
 public class DataFile
 {
+
     static DataFile instance = new DataFile();
     static Plugin p;
     static FileConfiguration bug;
@@ -61,6 +64,8 @@ public class DataFile
     {
         bug = YamlConfiguration.loadConfiguration(afile);
         Reports.createInv();
+        ConfigEditor.createConfig();
+
 
 
     }

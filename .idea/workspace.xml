@@ -7,16 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d8b59a22-c85f-4bf3-ae60-fa8dc8e2322c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BugReport/com/tatemylove/BugReport/Main.class" afterPath="$PROJECT_DIR$/out/production/BugReport/com/tatemylove/BugReport/Main.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BugReport/config.yml" afterPath="$PROJECT_DIR$/out/production/BugReport/config.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BugReport/plugin.yml" afterPath="$PROJECT_DIR$/out/production/BugReport/plugin.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/tatemylove/BugReport/Commands/MainCommand.java" afterPath="$PROJECT_DIR$/src/com/tatemylove/BugReport/Commands/MainCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/tatemylove/BugReport/Files/DataFile.java" afterPath="$PROJECT_DIR$/src/com/tatemylove/BugReport/Files/DataFile.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/tatemylove/BugReport/Listeners.java" afterPath="$PROJECT_DIR$/src/com/tatemylove/BugReport/Listeners.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/tatemylove/BugReport/Main.java" afterPath="$PROJECT_DIR$/src/com/tatemylove/BugReport/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/tatemylove/BugReport/Misc/Reports.java" afterPath="$PROJECT_DIR$/src/com/tatemylove/BugReport/Misc/Reports.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/config.yml" afterPath="$PROJECT_DIR$/src/config.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/plugin.yml" afterPath="$PROJECT_DIR$/src/plugin.yml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,30 +24,12 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/tatemylove/BugReport/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="19" column="53" lean-forward="false" selection-start-line="19" selection-start-column="53" selection-end-line="19" selection-end-column="53" />
+            <state relative-caret-position="1500">
+              <caret line="76" column="58" lean-forward="false" selection-start-line="76" selection-start-column="58" selection-end-line="76" selection-end-column="58" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Updater.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/tatemylove/BugReport/Updater/Updater.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="14325">
-              <caret line="588" column="50" lean-forward="false" selection-start-line="588" selection-start-column="50" selection-end-line="588" selection-end-column="50" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#29737#29738#0" expanded="false" />
-                <element signature="e#29773#29774#0" expanded="false" />
-                <element signature="e#30617#30618#0" expanded="false" />
-                <element signature="e#30670#30671#0" expanded="false" />
-                <element signature="e#30756#30757#0" expanded="false" />
-                <element signature="e#30800#30801#0" expanded="false" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -67,11 +44,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainCommand.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MainCommand.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/tatemylove/BugReport/Commands/MainCommand.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="75" column="31" lean-forward="false" selection-start-line="75" selection-start-column="31" selection-end-line="75" selection-end-column="31" />
+            <state relative-caret-position="810">
+              <caret line="84" column="61" lean-forward="false" selection-start-line="84" selection-start-column="61" selection-end-line="84" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -80,9 +57,12 @@
       <file leaf-file-name="Listeners.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/tatemylove/BugReport/Listeners.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1835">
-              <caret line="122" column="46" lean-forward="false" selection-start-line="122" selection-start-column="46" selection-end-line="122" selection-end-column="46" />
-              <folding />
+            <state relative-caret-position="2090">
+              <caret line="124" column="32" lean-forward="true" selection-start-line="124" selection-start-column="32" selection-end-line="124" selection-end-column="32" />
+              <folding>
+                <element signature="e#818#819#0" expanded="true" />
+                <element signature="e#845#846#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -100,8 +80,8 @@
       <file leaf-file-name="DataFile.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/tatemylove/BugReport/Files/DataFile.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1250">
-              <caret line="62" column="28" lean-forward="false" selection-start-line="62" selection-start-column="28" selection-end-line="62" selection-end-column="28" />
+            <state relative-caret-position="-185">
+              <caret line="19" column="1" lean-forward="false" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -110,8 +90,20 @@
       <file leaf-file-name="Reports.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/tatemylove/BugReport/Misc/Reports.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1335">
-              <caret line="58" column="9" lean-forward="false" selection-start-line="58" selection-start-column="9" selection-end-line="58" selection-end-column="9" />
+            <state relative-caret-position="600">
+              <caret line="71" column="33" lean-forward="true" selection-start-line="71" selection-start-column="33" selection-end-line="71" selection-end-column="33" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ConfigEditor.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/tatemylove/BugReport/Misc/ConfigEditor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1025">
+              <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -153,15 +145,17 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/com/tatemylove/BugReport/Updater.java" />
-        <option value="$PROJECT_DIR$/src/com/tatemylove/BugReport/Files/DataFile.java" />
         <option value="$PROJECT_DIR$/src/com/tatemylove/BugReport/Updater/Updater.java" />
         <option value="$PROJECT_DIR$/src/com/tatemylove/BugReport/Misc/Reminder.java" />
-        <option value="$PROJECT_DIR$/src/com/tatemylove/BugReport/Listeners.java" />
         <option value="$PROJECT_DIR$/src/config.yml" />
-        <option value="$PROJECT_DIR$/src/com/tatemylove/BugReport/Commands/MainCommand.java" />
         <option value="$PROJECT_DIR$/src/com/tatemylove/BugReport/Misc/Reports.java" />
         <option value="$PROJECT_DIR$/src/plugin.yml" />
+        <option value="$PROJECT_DIR$/src/com/tatemylove/BugReport/Misc/ConfigEditor.java" />
+        <option value="$PROJECT_DIR$/src/com/tatemylove/BugReport/Files/DataFile.java" />
+        <option value="$PROJECT_DIR$/src/com/tatemylove/BugReport/Listeners.java" />
+        <option value="$PROJECT_DIR$/src/com/tatemylove/BugReport/ConfigListeners.java" />
         <option value="$PROJECT_DIR$/src/com/tatemylove/BugReport/Main.java" />
+        <option value="$PROJECT_DIR$/src/com/tatemylove/BugReport/Commands/MainCommand.java" />
       </list>
     </option>
   </component>
@@ -249,6 +243,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Misc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BugReport" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BugReport" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BugReport" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Files" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -531,7 +547,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3297546" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3297546" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -563,7 +579,15 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/tatemylove/BugReport/Main.java</url>
+          <line>57</line>
+          <properties />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="2" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -572,27 +596,14 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/tatemylove/BugReport/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="17" column="84" lean-forward="false" selection-start-line="17" selection-start-column="84" selection-end-line="17" selection-end-column="84" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/tatemylove/BugReport/Commands/MainCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="950">
-          <caret line="43" column="59" lean-forward="false" selection-start-line="43" selection-start-column="59" selection-end-line="43" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/tatemylove/BugReport/Listeners.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="50">
           <caret line="13" column="27" lean-forward="false" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
-          <folding />
+          <folding>
+            <element signature="e#818#819#0" expanded="true" />
+            <element signature="e#845#846#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -668,7 +679,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="650">
           <caret line="39" column="56" lean-forward="false" selection-start-line="39" selection-start-column="56" selection-end-line="39" selection-end-column="56" />
-          <folding />
+          <folding>
+            <element signature="e#818#819#0" expanded="true" />
+            <element signature="e#845#846#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -692,7 +706,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="125">
           <caret line="18" column="31" lean-forward="true" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
-          <folding />
+          <folding>
+            <element signature="e#818#819#0" expanded="true" />
+            <element signature="e#845#846#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -768,7 +785,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="31" column="51" lean-forward="true" selection-start-line="31" selection-start-column="51" selection-end-line="31" selection-end-column="51" />
-          <folding />
+          <folding>
+            <element signature="e#818#819#0" expanded="true" />
+            <element signature="e#845#846#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -818,7 +838,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="700">
           <caret line="28" column="81" lean-forward="true" selection-start-line="28" selection-start-column="81" selection-end-line="28" selection-end-column="81" />
-          <folding />
+          <folding>
+            <element signature="e#818#819#0" expanded="true" />
+            <element signature="e#845#846#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -912,39 +935,25 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="14325">
           <caret line="588" column="50" lean-forward="false" selection-start-line="588" selection-start-column="50" selection-end-line="588" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/plugin.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="1" column="14" lean-forward="false" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/tatemylove/BugReport/Misc/Reports.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="71" column="33" lean-forward="true" selection-start-line="71" selection-start-column="33" selection-end-line="71" selection-end-column="33" />
           <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#29737#29738#0" expanded="false" />
-            <element signature="e#29773#29774#0" expanded="false" />
-            <element signature="e#30617#30618#0" expanded="false" />
-            <element signature="e#30670#30671#0" expanded="false" />
-            <element signature="e#30756#30757#0" expanded="false" />
-            <element signature="e#30800#30801#0" expanded="false" />
+            <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/tatemylove/BugReport/Listeners.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1835">
-          <caret line="122" column="46" lean-forward="false" selection-start-line="122" selection-start-column="46" selection-end-line="122" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/tatemylove/BugReport/Files/DataFile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1250">
-          <caret line="62" column="28" lean-forward="false" selection-start-line="62" selection-start-column="28" selection-end-line="62" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="16" column="17" lean-forward="false" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -959,36 +968,63 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/tatemylove/BugReport/Commands/MainCommand.java">
+    <entry file="file://$PROJECT_DIR$/src/config.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="75" column="31" lean-forward="false" selection-start-line="75" selection-start-column="31" selection-end-line="75" selection-end-column="31" />
+        <state relative-caret-position="400">
+          <caret line="16" column="17" lean-forward="false" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/tatemylove/BugReport/Misc/Reports.java">
+    <entry file="file://$PROJECT_DIR$/src/com/tatemylove/BugReport/Misc/ConfigEditor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1335">
-          <caret line="58" column="9" lean-forward="false" selection-start-line="58" selection-start-column="9" selection-end-line="58" selection-end-column="9" />
+        <state relative-caret-position="1025">
+          <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/plugin.yml">
+    <entry file="file://$PROJECT_DIR$/src/com/tatemylove/BugReport/Files/DataFile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="1" column="14" lean-forward="false" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
+        <state relative-caret-position="-185">
+          <caret line="19" column="1" lean-forward="false" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/tatemylove/BugReport/Listeners.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2090">
+          <caret line="124" column="32" lean-forward="true" selection-start-line="124" selection-start-column="32" selection-end-line="124" selection-end-column="32" />
+          <folding>
+            <element signature="e#818#819#0" expanded="true" />
+            <element signature="e#845#846#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/tatemylove/BugReport/ConfigListeners.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="9" column="4" lean-forward="true" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/tatemylove/BugReport/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="19" column="53" lean-forward="false" selection-start-line="19" selection-start-column="53" selection-end-line="19" selection-end-column="53" />
+        <state relative-caret-position="1500">
+          <caret line="76" column="58" lean-forward="false" selection-start-line="76" selection-start-column="58" selection-end-line="76" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/tatemylove/BugReport/Commands/MainCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="810">
+          <caret line="84" column="61" lean-forward="false" selection-start-line="84" selection-start-column="61" selection-end-line="84" selection-end-column="61" />
           <folding />
         </state>
       </provider>

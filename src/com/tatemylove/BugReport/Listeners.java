@@ -2,6 +2,7 @@ package com.tatemylove.BugReport;
 
 import com.sun.org.apache.regexp.internal.RE;
 import com.tatemylove.BugReport.Files.DataFile;
+import com.tatemylove.BugReport.Misc.ConfigEditor;
 import com.tatemylove.BugReport.Misc.Reports;
 import com.tatemylove.BugReport.Updater.Updater;
 import org.bukkit.Material;
@@ -21,9 +22,12 @@ import java.util.ArrayList;
  */
 public class Listeners implements Listener {
     Main plugin;
+    ConfigEditor config;
     public Listeners(Main pl){
         plugin = pl;
     }
+
+
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
         if(e.getPlayer().hasPermission("bugreport.joinmes")){
@@ -38,7 +42,6 @@ public class Listeners implements Listener {
     public void onInventoryClick(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
         Inventory inventory = e.getInventory();
-
         for (int k = 0; DataFile.getData().contains("Reports." + k); k++) {
             if (inventory.getName().equals(Main.reportInv.getName())) {
                 if(k < 53){
@@ -58,11 +61,9 @@ public class Listeners implements Listener {
                     book.setItemMeta(bm);
                     p.getInventory().addItem(book);
                 }
-            }else if (k == 53){
+            }else if (k == 53) {
                     break;
                 }
-
-
         }
         }
         if(inventory.getName().equals(Main.reportInv.getName())){
@@ -70,7 +71,6 @@ public class Listeners implements Listener {
                 p.closeInventory();
                 Reports.createInv2();
                 p.openInventory(Main.reportInv2);
-
             }
         }
         for(int i = 54; DataFile.getData().contains("Reports." + i); i++){
@@ -140,6 +140,20 @@ public class Listeners implements Listener {
                         p.sendMessage(Main.prefix + "Received Report # " + "§d" + j);
                     }
                 }
+            }
+        }
+    }
+
+    @EventHandler
+    public void configClick(InventoryClickEvent e){
+        Player p = (Player) e.getWhoClicked();
+        Inventory inventory = e.getInventory();
+
+        if(inventory.getName().equals(ConfigEditor.configInv.getName())){
+            if(e.getSlot() == 0){
+                p.closeInventory();
+                this.plugin.createReminder();
+                p.openInventory(ConfigEditor.configReminder);
             }
         }
     }

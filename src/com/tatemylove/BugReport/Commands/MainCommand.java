@@ -2,6 +2,7 @@ package com.tatemylove.BugReport.Commands;
 
 import com.tatemylove.BugReport.Files.DataFile;
 import com.tatemylove.BugReport.Main;
+import com.tatemylove.BugReport.Misc.ConfigEditor;
 import com.tatemylove.BugReport.Misc.Reports;
 import com.tatemylove.BugReport.Updater.Updater;
 import org.bukkit.ChatColor;
@@ -55,7 +56,7 @@ public class MainCommand implements CommandExecutor {
                     p.sendMessage("§d/bugreport help ~ Brings up the help section");
                     p.sendMessage("§2/bugreport create [Title] [Description] ~ Creates a bug report");
                     p.sendMessage("§b/bugreport view ~ Ingame viewing of bug reports");
-                    p.sendMessage("§c/bugreport reload ~ Reloads the data yml file, always do this before viewing reports");
+                    p.sendMessage("§c/bugreport reload ~ Reloads the data yml file and config");
                     p.sendMessage(("§4/bugreport version ~ Checks the current version"));
                     p.sendMessage("§6/bugreport delete <ID> ~ Deletes the report with the ID (Example: /bugreport delete 0)");
                     p.sendMessage("§a/bugreport update ~ Updates the plugin");
@@ -74,12 +75,14 @@ public class MainCommand implements CommandExecutor {
                         p.sendMessage(Main.prefix + "§eDatabase reloaded!");
                         DataFile.saveData();
                         DataFile.reloadData();
+                        this.plugin.saveDefaultConfig();
+                        this.plugin.reloadConfig();
                     } else {
                         p.sendMessage(Main.prefix + this.plugin.getConfig().getString("noperm-message"));
                     }
                 }
                 if (args[0].equalsIgnoreCase(("version"))) {
-                    p.sendMessage(Main.prefix + "§aRunning version " + Main.version);
+                    p.sendMessage(Main.prefix + "§aRunning §5" + Main.version);
                 }
                 if (args[0].equalsIgnoreCase("delete")) {
                     if (p.hasPermission("bugreport.delete")) {
@@ -98,6 +101,12 @@ public class MainCommand implements CommandExecutor {
                         p.sendMessage(Main.prefix + "Update successfull! Changes will take action next server restart");
                     } else {
                         p.sendMessage(Main.prefix + this.plugin.getConfig().getString("noperm-message"));
+                    }
+                }
+                if(args[0].equalsIgnoreCase("config")){
+                    if(p.hasPermission("bugreport.config")){
+                        DataFile.reloadData();
+                        p.openInventory(ConfigEditor.configInv);
                     }
                 }
                 if (args[0].equalsIgnoreCase("check")) {

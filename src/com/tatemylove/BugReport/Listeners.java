@@ -30,11 +30,13 @@ public class Listeners implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
-        if(e.getPlayer().hasPermission("bugreport.joinmes")){
-            Player p = e.getPlayer();
-            p.sendMessage(Main.prefix + "§cYou are running " + Main.version);
-            this.plugin.checkUpdate(p);
-            p.sendMessage(Main.prefix + "§aTo update type /bugreport update");
+        if(e.getPlayer().hasPermission("bugreport.joinmes")) {
+            if (this.plugin.getConfig().getBoolean("join-message") == true) {
+                Player p = e.getPlayer();
+                p.sendMessage(Main.prefix + "§cYou are running " + Main.version);
+                this.plugin.checkUpdate(p);
+                p.sendMessage(Main.prefix + "§aTo update type /bugreport update");
+            }
         }
     }
 
@@ -148,12 +150,170 @@ public class Listeners implements Listener {
     public void configClick(InventoryClickEvent e){
         Player p = (Player) e.getWhoClicked();
         Inventory inventory = e.getInventory();
-
         if(inventory.getName().equals(ConfigEditor.configInv.getName())){
             if(e.getSlot() == 0){
                 p.closeInventory();
                 this.plugin.createReminder();
                 p.openInventory(ConfigEditor.configReminder);
+            }
+            if(e.getSlot() == 22){
+                e.setCancelled(true);
+                p.closeInventory();
+            }
+            if(e.getSlot() == 8){
+                p.closeInventory();
+                this.plugin.createUpdater();
+                p.openInventory(ConfigEditor.configAutoUpdater);
+            }
+            if(e.getSlot() == 4){
+                p.closeInventory();
+                this.plugin.createJoinMessage();
+                p.openInventory(ConfigEditor.configJoinMessage);
+            }
+        }
+
+        if(inventory.getName().equals(ConfigEditor.configReminder.getName())){
+            if(e.getSlot() == 4){
+                e.setCancelled(true);
+            }
+            if(e.getSlot() == 9){
+                this.plugin.getConfig().set("reminder-interval", 30);
+                this.plugin.saveConfig();
+                this.plugin.reloadConfig();
+                p.closeInventory();
+                this.plugin.createReminder();
+                p.openInventory(ConfigEditor.configReminder);
+                p.sendMessage(Main.prefix + "§aSuccessfully changed reminder-interval to: §5" + this.plugin.getConfig().getInt("reminder-interval"));
+            }
+            if(e.getSlot() == 10){
+                this.plugin.getConfig().set("reminder-interval", 60);
+                this.plugin.saveConfig();
+                this.plugin.reloadConfig();
+                p.closeInventory();
+                this.plugin.createReminder();
+                p.openInventory(ConfigEditor.configReminder);
+                p.sendMessage(Main.prefix + "§aSuccessfully changed reminder-interval to: §5" + this.plugin.getConfig().getInt("reminder-interval"));
+            }
+            if(e.getSlot() == 11){
+                this.plugin.getConfig().set("reminder-interval", 90);
+                this.plugin.saveConfig();
+                this.plugin.reloadConfig();
+                p.closeInventory();
+                this.plugin.createReminder();
+                p.openInventory(ConfigEditor.configReminder);
+                p.sendMessage(Main.prefix + "§aSuccessfully changed reminder-interval to: §5" + this.plugin.getConfig().getInt("reminder-interval"));
+            }
+            if(e.getSlot() == 12){
+                this.plugin.getConfig().set("reminder-interval", 120);
+                this.plugin.saveConfig();
+                this.plugin.reloadConfig();
+                p.closeInventory();
+                this.plugin.createReminder();
+                p.openInventory(ConfigEditor.configReminder);
+                p.sendMessage(Main.prefix + "§aSuccessfully changed reminder-interval to: §5" + this.plugin.getConfig().getInt("reminder-interval"));
+            }
+            if(e.getSlot() == 13){
+                this.plugin.getConfig().set("reminder-interval", 150);
+                this.plugin.saveConfig();
+                this.plugin.reloadConfig();
+                p.closeInventory();
+                this.plugin.createReminder();
+                p.openInventory(ConfigEditor.configReminder);
+                p.sendMessage(Main.prefix + "§aSuccessfully changed reminder-interval to: §5" + this.plugin.getConfig().getInt("reminder-interval"));
+            }
+            if(e.getSlot() == 14){
+                this.plugin.getConfig().set("reminder-interval", 180);
+                this.plugin.saveConfig();
+                this.plugin.reloadConfig();
+                p.closeInventory();
+                this.plugin.createReminder();
+                p.openInventory(ConfigEditor.configReminder);
+                p.sendMessage(Main.prefix + "§aSuccessfully changed reminder-interval to: §5" + this.plugin.getConfig().getInt("reminder-interval"));
+            }
+            if(e.getSlot() == 15){
+                this.plugin.getConfig().set("reminder-interval", 210);
+                this.plugin.saveConfig();
+                this.plugin.reloadConfig();
+                p.closeInventory();
+                this.plugin.createReminder();
+                p.openInventory(ConfigEditor.configReminder);
+                p.sendMessage(Main.prefix + "§aSuccessfully changed reminder-interval to: §5" + this.plugin.getConfig().getInt("reminder-interval"));
+            }
+            if(e.getSlot() == 16){
+                this.plugin.getConfig().set("reminder-interval", 240);
+                this.plugin.saveConfig();
+                this.plugin.reloadConfig();
+                p.closeInventory();
+                this.plugin.createReminder();
+                p.openInventory(ConfigEditor.configReminder);
+                p.sendMessage(Main.prefix + "§aSuccessfully changed reminder-interval to: §5" + this.plugin.getConfig().getInt("reminder-interval"));
+            }
+            if(e.getSlot() == 17){
+                this.plugin.getConfig().set("reminder-interval", 270);
+                this.plugin.saveConfig();
+                this.plugin.reloadConfig();
+                p.closeInventory();
+                this.plugin.createReminder();
+                p.openInventory(ConfigEditor.configReminder);
+                p.sendMessage(Main.prefix + "§aSuccessfully changed reminder-interval to: §5" + this.plugin.getConfig().getInt("reminder-interval"));
+            }
+            if(e.getSlot() == 22){
+                p.closeInventory();
+                ConfigEditor.createConfig();
+                p.openInventory(ConfigEditor.configInv);
+            }
+        }
+        if(inventory.getName().equals(ConfigEditor.configAutoUpdater.getName())){
+            if(e.getSlot() == 4){
+                e.setCancelled(true);
+            }
+            if(e.getSlot() == 9){
+                this.plugin.getConfig().set("auto-update", true);
+                this.plugin.saveConfig();
+                this.plugin.reloadConfig();
+                this.plugin.createUpdater();
+                p.closeInventory();
+                p.openInventory(ConfigEditor.configAutoUpdater);
+                p.sendMessage(Main.prefix + "§aSuccessfully changed auto-update to: §5" + this.plugin.getConfig().getBoolean("auto-update"));
+            }
+            if(e.getSlot() == 17){
+                this.plugin.getConfig().set("auto-update", false);
+                this.plugin.saveConfig();
+                this.plugin.reloadConfig();
+                this.plugin.createUpdater();
+                p.closeInventory();
+                p.openInventory(ConfigEditor.configAutoUpdater);
+                p.sendMessage(Main.prefix + "§aSuccessfully changed auto-update to: §5" + this.plugin.getConfig().getBoolean("auto-update"));
+            }
+            if(e.getSlot() == 22){
+                p.closeInventory();
+                ConfigEditor.createConfig();
+                p.openInventory(ConfigEditor.configInv);
+            }
+        }
+        if(inventory.getName().equals(ConfigEditor.configJoinMessage.getName())){
+            if(e.getSlot() == 9){
+                this.plugin.getConfig().set("join-message", true);
+                this.plugin.saveConfig();
+                this.plugin.reloadConfig();
+                p.closeInventory();
+                this.plugin.createJoinMessage();
+                p.openInventory(ConfigEditor.configJoinMessage);
+                p.sendMessage(Main.prefix + "§aSuccessfully changed join-message to: §5" + this.plugin.getConfig().getBoolean("join-message"));
+            }
+            if(e.getSlot() == 17){
+                this.plugin.getConfig().set("join-message", false);
+                this.plugin.saveConfig();
+                this.plugin.reloadConfig();
+                p.closeInventory();
+                this.plugin.createJoinMessage();
+                p.openInventory(ConfigEditor.configJoinMessage);
+                p.sendMessage(Main.prefix + "§aSuccessfully changed join-message to: §5" + this.plugin.getConfig().getBoolean("join-message"));
+            }
+            if(e.getSlot() == 22){
+                p.closeInventory();
+                ConfigEditor.createConfig();
+                p.openInventory(ConfigEditor.configInv);
             }
         }
     }

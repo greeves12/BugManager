@@ -1,17 +1,13 @@
-# This is the interval between each message in seconds
 reminder-interval: 300
 
-# Define the message you want to send to the players
-reminder-message: "&dIf you encounter a bug, please report it! \n&b/bugreport <title> <description>"
+reminder-message: '&dIf you encounter a bug, please report it! \n&b/bugreport <title> <description>'
 
-# Edit the message you want to send them after they report a bug
-report-message: "&bThanks for reporting!"
+report-message: '&bThanks for reporting!'
 
-#Change the message after a delete is perfomed
-delete-message: "§aReport deleted"
+delete-message: '&aReport deleted'
 
-#Change the message for player without sufficient permissions
-noperm-message: "§cYou don't have access to this command!"
+noperm-message: '&cYou do not have access to this command!'
 
-#Enable or Disable auto update
+join-message: true
+
 auto-update: true

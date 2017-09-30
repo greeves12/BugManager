@@ -1,13 +1,9 @@
 reminder-interval: 300
-
 reminder-message: '&dIf you encounter a bug, please report it! \n&b/bugreport <title> <description>'
-
 report-message: '&bThanks for reporting!'
-
 delete-message: '&aReport deleted'
-
 noperm-message: '&cYou do not have access to this command!'
-
 join-message: true
-
+cool-down: 300
 auto-update: true
+cooldown-mes: '§cYou cannot report another bug for %secondsleft% more seconds'

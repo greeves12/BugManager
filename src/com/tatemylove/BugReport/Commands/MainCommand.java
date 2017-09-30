@@ -4,14 +4,12 @@ import com.tatemylove.BugReport.Files.DataFile;
 import com.tatemylove.BugReport.Main;
 import com.tatemylove.BugReport.Misc.ConfigEditor;
 import com.tatemylove.BugReport.Misc.Reports;
-import com.tatemylove.BugReport.Updater.Updater;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.StringJoiner;
 
 /**
  * Created by Tate on 9/3/2017.
@@ -43,7 +41,6 @@ public class MainCommand implements CommandExecutor {
                                 desc = desc + arg;
                             }
                             Reports.fileReport(p, title, desc);
-                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + plugin.getConfig().getString("report-message")));
                             return true;
                         }
 

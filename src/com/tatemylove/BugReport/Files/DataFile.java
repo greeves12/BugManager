@@ -1,6 +1,5 @@
 package com.tatemylove.BugReport.Files;
 
-import com.tatemylove.BugReport.Main;
 import com.tatemylove.BugReport.Misc.ConfigEditor;
 import com.tatemylove.BugReport.Misc.Reports;
 import org.bukkit.Bukkit;
@@ -65,9 +64,6 @@ public class DataFile
         bug = YamlConfiguration.loadConfiguration(afile);
         Reports.createInv();
         ConfigEditor.createConfig();
-
-
-
     }
 
     public static PluginDescriptionFile getDesc()

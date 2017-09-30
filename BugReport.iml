@@ -10,11 +10,11 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Desktop/Test Server/craftbukkit.jar!/" />
+          <root url="jar://$USER_HOME$/Desktop/Servers/Test Server - Bukkit/craftbukkit.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://$USER_HOME$/Desktop/Test Server/craftbukkit.jar!/" />
+          <root url="jar://$USER_HOME$/Desktop/Servers/Test Server - Bukkit/craftbukkit.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>

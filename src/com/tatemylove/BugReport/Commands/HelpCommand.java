@@ -1,7 +1,6 @@
 package com.tatemylove.BugReport.Commands;
 
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 /**
  * Created by Tate on 9/27/2017.

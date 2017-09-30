@@ -1,13 +1,12 @@
 package com.tatemylove.BugReport.Misc;
 
-import com.mysql.fabric.xmlrpc.base.Array;
+
 import com.tatemylove.BugReport.Files.DataFile;
 import com.tatemylove.BugReport.Main;
-import org.bukkit.Bukkit;
+import com.tatemylove.BugReport.Plugin.ThisPlugin;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -17,28 +16,45 @@ import java.util.*;
  * Created by Tate on 9/3/2017.
  */
 public class Reports {
+    public static int cooldown = ThisPlugin.getPlugin().getConfig().getInt("cool-down");
     public static int newID;
-    public int cooldown = 3000;
+    public static HashMap<String, Long> coolDown = new HashMap<>();
 
 
     public static void fileReport(Player p, String title, String desc) {
-        TreeMap<Integer, Integer> numbers = new TreeMap();
-        for (int k = 0; DataFile.getData().contains("Reports." + k); k++) {
-            numbers.put(Integer.valueOf(k), Integer.valueOf(k));
+        if (coolDown.containsKey(p.getName())) {
+                long secondsLeft = ((coolDown.get(p.getName()) / 1000) + cooldown) - (System.currentTimeMillis() / 1000);
+                if (secondsLeft > 0) {
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + ThisPlugin.getPlugin().getConfig().getString("cooldown-mes").replaceAll("%secondsleft%", String.valueOf(secondsLeft))));
+                }
+            if (secondsLeft <= -1) {
+                coolDown.clear();
+            }
+            }
+
+            if (!coolDown.containsKey(p.getName())) {
+
+            TreeMap<Integer, Integer> numbers = new TreeMap();
+            for (int k = 0; DataFile.getData().contains("Reports." + k); k++) {
+                numbers.put(Integer.valueOf(k), Integer.valueOf(k));
+            }
+
+            if (numbers.size() == 0) {
+                newID = 0;
+            } else {
+                newID = ((Integer) numbers.lastEntry().getValue()).intValue() + 1;
+            }
+
+            DataFile.getData().set("Reports." + newID + ".Player", p.getName());
+            DataFile.getData().set("Reports." + newID + ".Title", title);
+            DataFile.getData().set("Reports." + newID + ".Description", desc);
+            DataFile.saveData();
+            DataFile.reloadData();
+            p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + ThisPlugin.getPlugin().getConfig().getString("report-message")));
+            if (!p.hasPermission("bugreport.bypass")) {
+                coolDown.put(p.getPlayer().getName(), System.currentTimeMillis());
+            }
         }
-
-        if (numbers.size() == 0) {
-            newID = 0;
-        } else {
-            newID = ((Integer) numbers.lastEntry().getValue()).intValue() + 1;
-        }
-
-        DataFile.getData().set("Reports." + newID + ".Player", p.getName());
-        DataFile.getData().set("Reports." + newID + ".Title", title);
-        DataFile.getData().set("Reports." + newID + ".Description", desc);
-        DataFile.saveData();
-        DataFile.reloadData();
-
     }
 
     public static void deleteReport(int k) {

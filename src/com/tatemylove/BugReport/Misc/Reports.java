@@ -2,6 +2,7 @@ package com.tatemylove.BugReport.Misc;
 
 
 import com.tatemylove.BugReport.Files.DataFile;
+import com.tatemylove.BugReport.Files.LangFile;
 import com.tatemylove.BugReport.Main;
 import com.tatemylove.BugReport.Plugin.ThisPlugin;
 import org.bukkit.ChatColor;
@@ -25,7 +26,7 @@ public class Reports {
         if (coolDown.containsKey(p.getName())) {
                 long secondsLeft = ((coolDown.get(p.getName()) / 1000) + cooldown) - (System.currentTimeMillis() / 1000);
                 if (secondsLeft > 0) {
-                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + ThisPlugin.getPlugin().getConfig().getString("cooldown-mes").replaceAll("%secondsleft%", String.valueOf(secondsLeft))));
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + LangFile.getData().getString("cooldown-message").replaceAll("%secondsleft%", String.valueOf(secondsLeft))));
                 }
             if (secondsLeft <= -1) {
                 coolDown.clear();
@@ -50,7 +51,7 @@ public class Reports {
             DataFile.getData().set("Reports." + newID + ".Description", desc);
             DataFile.saveData();
             DataFile.reloadData();
-            p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + ThisPlugin.getPlugin().getConfig().getString("report-message")));
+            p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + LangFile.getData().getString("report-message")));
             if (!p.hasPermission("bugreport.bypass")) {
                 coolDown.put(p.getPlayer().getName(), System.currentTimeMillis());
             }

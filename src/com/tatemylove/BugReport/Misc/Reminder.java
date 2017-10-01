@@ -1,5 +1,6 @@
 package com.tatemylove.BugReport.Misc;
 
+import com.tatemylove.BugReport.Files.LangFile;
 import com.tatemylove.BugReport.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -22,7 +23,7 @@ public class Reminder extends BukkitRunnable{
         if (Main.timeUntilStart == 0) {
             plugin.restartCountdown();
             for (Player p : Bukkit.getOnlinePlayers()) {
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + plugin.getConfig().getString("reminder-message")));
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + LangFile.getData().getString("reminder-message")));
             }
         }
         Main.timeUntilStart -= 1;

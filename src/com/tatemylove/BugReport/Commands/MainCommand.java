@@ -1,6 +1,7 @@
 package com.tatemylove.BugReport.Commands;
 
 import com.tatemylove.BugReport.Files.DataFile;
+import com.tatemylove.BugReport.Files.LangFile;
 import com.tatemylove.BugReport.Main;
 import com.tatemylove.BugReport.Misc.ConfigEditor;
 import com.tatemylove.BugReport.Misc.Reports;
@@ -45,7 +46,7 @@ public class MainCommand implements CommandExecutor {
                         }
 
                     } else {
-                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + plugin.getConfig().getString("noperm-message")));
+                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + LangFile.getData().getString("noperm-message")));
                     }
                 }
                     if (args[0].equalsIgnoreCase("help")) {
@@ -56,7 +57,7 @@ public class MainCommand implements CommandExecutor {
                         DataFile.reloadData();
                         p.openInventory(Main.reportInv);
                     } else {
-                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + plugin.getConfig().getString("noperm-message")));
+                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + LangFile.getData().getString("noperm-message")));
                     }
                 }
                 if (args[0].equalsIgnoreCase("reload")) {
@@ -67,7 +68,7 @@ public class MainCommand implements CommandExecutor {
                         this.plugin.saveConfig();
                         this.plugin.reloadConfig();
                     } else {
-                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + plugin.getConfig().getString("noperm-message")));
+                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + LangFile.getData().getString("noperm-message")));
                     }
                 }
                 if (args[0].equalsIgnoreCase(("version"))) {
@@ -78,10 +79,10 @@ public class MainCommand implements CommandExecutor {
                         if (args.length >= 2) {
                             int k = Integer.parseInt(args[1]);
                             Reports.deleteReport(k);
-                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + this.plugin.getConfig().getString("delete-message")));
+                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + LangFile.getData().getString("delete-message")));
                         }
                     } else {
-                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + plugin.getConfig().getString("noperm-message")));
+                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + LangFile.getData().getString("noperm-message")));
                     }
                 }
                 if (args[0].equalsIgnoreCase("update")) {
@@ -89,7 +90,7 @@ public class MainCommand implements CommandExecutor {
                         this.plugin.updatePlugin();
                         p.sendMessage(Main.prefix + "Update successfull! Changes will take action next server restart");
                     } else {
-                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + plugin.getConfig().getString("noperm-message")));
+                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + LangFile.getData().getString("noperm-message")));
                     }
                 }
                 if(args[0].equalsIgnoreCase("config")){
@@ -97,12 +98,12 @@ public class MainCommand implements CommandExecutor {
                         DataFile.reloadData();
                         p.openInventory(ConfigEditor.configInv);
                     }else{
-                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + this.plugin.getConfig().getString("noperm-message")));
+                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + LangFile.getData().getString("noperm-message")));
                     }
                 }
                 if (args[0].equalsIgnoreCase("check")) {
                     this.plugin.checkUpdate(p);
-                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + plugin.getConfig().getString("noperm-message")));
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + LangFile.getData().getString("noperm-message")));
                 }
 
             }

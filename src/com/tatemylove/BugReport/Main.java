@@ -2,6 +2,7 @@ package com.tatemylove.BugReport;
 
 import com.tatemylove.BugReport.Commands.MainCommand;
 import com.tatemylove.BugReport.Files.DataFile;
+import com.tatemylove.BugReport.Files.LangFile;
 import com.tatemylove.BugReport.Misc.Reminder;
 
 import com.tatemylove.BugReport.Plugin.ThisPlugin;
@@ -18,7 +19,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class Main extends JavaPlugin{
     public static String prefix = "§d[Bug§bManager] ";
-    public static String version = "BugManager v1.3.0";
+    public static String version = "BugManager v1.3.1";
     private static int startCountdownId;
     public static int timeUntilStart;
     public static Inventory reportInv = Bukkit.createInventory(null, 54, "§dReports Page 1:");
@@ -48,6 +49,8 @@ public class Main extends JavaPlugin{
         ThisPlugin.getPlugin().reloadConfig();
 
         DataFile.setup(this);
+        LangFile.setup(this);
+
         MainCommand cmd = new MainCommand(this);
         getCommand("bugreport").setExecutor(cmd);
 

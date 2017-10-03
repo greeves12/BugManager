@@ -58,43 +58,53 @@ public class Reports {
         }
     }
 
-    public static void deleteReport(int k) {
+    public static void deleteReport(int k, Player p) {
         if (DataFile.getData().contains("Reports." + k)) {
-            String player = DataFile.getData().getString("Reports." + k + ".Player");
-            String title = DataFile.getData().getString("Reports." + k + ".Title");
-            ItemStack stack = new ItemStack(Material.BOOK, 1);
-            ItemMeta meta = stack.getItemMeta();
-            ArrayList<String> lore = new ArrayList<String>();
-            lore.add(("By: " + player));
-            lore.add(("Title: " + title));
-            meta.setLore(lore);
-            stack.setItemMeta(meta);
             DataFile.getData().set("Reports." + k, null);
             DataFile.saveData();
             DataFile.reloadData();
-            Main.reportInv.setItem(k, null);
+            p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + LangFile.getData().getString("delete-message").replaceAll("%report#%", String.valueOf(k))));
+
+            if(k <=52){
+                Main.reportInv.setItem(k, null);
+            }
+            if (k >= 53) {
+                Main.reportInv2.setItem(k % 53, null);
+            }
+            if(k >=99){
+                Main.reportInv3.setItem(k % 99, null);
+            }
+            if(k>=143){
+                Main.reportInv4.setItem(k % 143, null);
+            }
+            if(k > 188){
+                p.sendMessage(Main.prefix + "§cInvalid argument (" + k + "§c)");
+            }
+        }else{
+            p.sendMessage(Main.prefix + "§cReport §e" + k + "§c does not exist!");
         }
 
     }
 
     public static void createInv() {
-        for (int k = 0; DataFile.getData().contains("Reports." + k); k++) {
+        for (String k : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)) {
+            int j = Integer.parseInt(k);
 
-            if (k < 53) {
-                String player = DataFile.getData().getString("Reports." + k + ".Player");
-                String title = DataFile.getData().getString("Reports." + k + ".Title");
-                ItemStack stack = new ItemStack(Material.BOOK, 1);
-                ItemMeta meta = stack.getItemMeta();
+            if(j >=0) {
+                String player = DataFile.getData().getString("Reports." + Integer.parseInt(k) + ".Player");
+                String title = DataFile.getData().getString("Reports." + Integer.parseInt(k) + ".Title");
+                ItemStack Stack = new ItemStack(Material.BOOK, 1);
+                ItemMeta meta = Stack.getItemMeta();
                 ArrayList<String> lore = new ArrayList<String>();
-                meta.setDisplayName("§aReport Number: §d" + k);
+                meta.setDisplayName("§aReport Number: §d" + Integer.parseInt(k));
                 lore.add(("By: " + player));
                 lore.add(("Title: " + title));
                 meta.setLore(lore);
-                stack.setItemMeta(meta);
-                Main.reportInv.setItem(k, stack);
-
-            } else if (k == 53) {
-                break;
+                Stack.setItemMeta(meta);
+                Main.reportInv.setItem(Integer.parseInt(k), Stack);
+                if (j == 52) {
+                    break;
+                }
             }
         }
         ItemStack anvil = new ItemStack(Material.ANVIL, 1);
@@ -105,41 +115,44 @@ public class Reports {
     }
 
     public static void createInv2() {
+        for (String i  : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)) {
+            int j = Integer.parseInt(i);
 
-        for (int i = 54; DataFile.getData().contains("Reports." + i); i++) {
-            if (i < 99) {
-                String player = DataFile.getData().getString("Reports." + i + ".Player");
-                String title = DataFile.getData().getString("Reports." + i + ".Title");
-                ItemStack Stack = new ItemStack(Material.BOOK, 1);
-                ItemMeta meta = Stack.getItemMeta();
-                ArrayList<String> lore = new ArrayList<String>();
-                meta.setDisplayName("§aReport Number: §d" + i);
-                lore.add(("By: " + player));
-                lore.add(("Title: " + title));
-                meta.setLore(lore);
-                Stack.setItemMeta(meta);
-                Main.reportInv2.setItem(i % 54, Stack);
-            }else if(i==99){
-                break;
+                    if(j >= 53) {
+                        String player = DataFile.getData().getString("Reports." + j + ".Player");
+                        String title = DataFile.getData().getString("Reports." + j + ".Title");
+                        ItemStack Stack = new ItemStack(Material.BOOK, 1);
+                        ItemMeta meta = Stack.getItemMeta();
+                        ArrayList<String> lore = new ArrayList<String>();
+                        meta.setDisplayName("§aReport Number: §d" + j);
+                        lore.add(("By: " + player));
+                        lore.add(("Title: " + title));
+                        meta.setLore(lore);
+                        Stack.setItemMeta(meta);
+                        Main.reportInv2.setItem(j % 53, Stack);
+                        if (j == 97) {
+                            break;
+                        }
+                    }
+            ItemStack anvil = new ItemStack(Material.ANVIL, 1);
+            ItemMeta Meta = anvil.getItemMeta();
+            Meta.setDisplayName("§bNext Page");
+            anvil.setItemMeta(Meta);
+            Main.reportInv2.setItem(53, anvil);
+
+            ItemStack anvil1 = new ItemStack(Material.ANVIL, 1);
+            ItemMeta Meta1 = anvil1.getItemMeta();
+            Meta1.setDisplayName("§bPrevious Page");
+            anvil1.setItemMeta(Meta1);
+            Main.reportInv2.setItem(45, anvil1);
             }
-
-        }
-        ItemStack anvil = new ItemStack(Material.ANVIL, 1);
-        ItemMeta Meta = anvil.getItemMeta();
-        Meta.setDisplayName("§bPrevious Page");
-        anvil.setItemMeta(Meta);
-
-        ItemStack anvil2 = new ItemStack(Material.ANVIL, 1);
-        ItemMeta anvilMeta = anvil2.getItemMeta();
-        anvilMeta.setDisplayName("§bNext Page");
-        anvil2.setItemMeta(anvilMeta);
-        Main.reportInv2.setItem(45, anvil);
-        Main.reportInv2.setItem(53, anvil2);
     }
 
     public static void createInv3(){
-        for (int j = 99; DataFile.getData().contains("Reports." + j); j++){
-            if(j < 144){
+        for (String i  : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)) {
+            int j = Integer.parseInt(i);
+
+            if(j >= 98){
                 String player = DataFile.getData().getString("Reports." + j + ".Player");
                 String title = DataFile.getData().getString("Reports." + j + ".Title");
                 ItemStack Stack = new ItemStack(Material.BOOK, 1);
@@ -150,19 +163,52 @@ public class Reports {
                 lore.add(("Title: " + title));
                 meta.setLore(lore);
                 Stack.setItemMeta(meta);
-                Main.reportInv3.setItem(j % 99, Stack);
-            }else if(j == 144){
+                Main.reportInv3.setItem(j % 98, Stack);
+
+            }
+            if (j == 142) {
                 break;
             }
+            ItemStack anvil = new ItemStack(Material.ANVIL, 1);
+            ItemMeta Meta = anvil.getItemMeta();
+            Meta.setDisplayName("§bNext Page");
+            anvil.setItemMeta(Meta);
+            Main.reportInv3.setItem(53, anvil);
 
+            ItemStack anvil1 = new ItemStack(Material.ANVIL, 1);
+            ItemMeta Meta1 = anvil1.getItemMeta();
+            Meta1.setDisplayName("§bPrevious Page");
+            anvil1.setItemMeta(Meta1);
+            Main.reportInv3.setItem(45, anvil1);
         }
-        ItemStack anvil = new ItemStack(Material.ANVIL, 1);
-        ItemMeta Meta = anvil.getItemMeta();
-        Meta.setDisplayName("§bPrevious Page");
-        anvil.setItemMeta(Meta);
+    }
 
+    public static void createInv4(){
+        for (String i  : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)) {
+            int j = Integer.parseInt(i);
 
-        Main.reportInv3.setItem(45, anvil);
+            if(j >= 143) {
+                String player = DataFile.getData().getString("Reports." + j + ".Player");
+                String title = DataFile.getData().getString("Reports." + j + ".Title");
+                ItemStack Stack = new ItemStack(Material.BOOK, 1);
+                ItemMeta meta = Stack.getItemMeta();
+                ArrayList<String> lore = new ArrayList<String>();
+                meta.setDisplayName("§aReport Number: §d" + j);
+                lore.add(("By: " + player));
+                lore.add(("Title: " + title));
+                meta.setLore(lore);
+                Stack.setItemMeta(meta);
+                Main.reportInv4.setItem(j % 143, Stack);
+                if (j == 187) {
+                    break;
+                }
+            }
+            ItemStack anvil1 = new ItemStack(Material.ANVIL, 1);
+            ItemMeta Meta1 = anvil1.getItemMeta();
+            Meta1.setDisplayName("§bPrevious Page");
+            anvil1.setItemMeta(Meta1);
+            Main.reportInv4.setItem(45, anvil1);
+        }
     }
 }
 

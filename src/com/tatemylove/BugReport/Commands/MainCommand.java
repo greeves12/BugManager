@@ -78,8 +78,8 @@ public class MainCommand implements CommandExecutor {
                     if (p.hasPermission("bugreport.delete")) {
                         if (args.length >= 2) {
                             int k = Integer.parseInt(args[1]);
-                            Reports.deleteReport(k);
-                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + LangFile.getData().getString("delete-message")));
+                            Reports.deleteReport(k, p);
+
                         }
                     } else {
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + LangFile.getData().getString("noperm-message")));

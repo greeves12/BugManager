@@ -59,6 +59,7 @@ public class Listeners implements Listener {
                     bm.setAuthor(reports);
                     book.setItemMeta(bm);
                     p.getInventory().addItem(book);
+                    p.sendMessage(Main.prefix + "Received Report # " + "§d" + k);
                 }
             }else if (k == 53) {
                     break;
@@ -72,10 +73,10 @@ public class Listeners implements Listener {
                 p.openInventory(Main.reportInv2);
             }
         }
-        for(int i = 54; DataFile.getData().contains("Reports." + i); i++){
+        for(int i = 53; DataFile.getData().contains("Reports." + i); i++){
             if(inventory.getName().equals(Main.reportInv2.getName())){
-                if(e.getSlot() == i%54) {
-                    if (i < 99) {
+                if(e.getSlot() == i%53) {
+                    if (i < 98) {
                         String reports = DataFile.getData().getString("Reports." + i + ".Player");
                         String title = DataFile.getData().getString("Reports." + i + ".Title");
                         String description = DataFile.getData().getString("Reports." + i + ".Description");
@@ -91,7 +92,7 @@ public class Listeners implements Listener {
                         book.setItemMeta(bm);
                         p.getInventory().addItem(book);
                         p.sendMessage(Main.prefix + "Received Report # " + "§d" + i);
-                    }else if(i == 99){
+                    }else if(i == 98){
                         break;
                     }
                 }
@@ -117,11 +118,23 @@ public class Listeners implements Listener {
                 Reports.createInv2();
                 p.openInventory(Main.reportInv2);
             }
+            if(e.getSlot() == 53){
+                p.closeInventory();
+                Reports.createInv4();
+                p.openInventory(Main.reportInv4);
+            }
         }
-        for(int j = 99; DataFile.getData().contains("Reports." + j); j++ ){
+        if(inventory.getName().equalsIgnoreCase(Main.reportInv4.getName())){
+            if(e.getSlot() == 45){
+                p.closeInventory();
+                Reports.createInv3();
+                p.openInventory(Main.reportInv3);
+            }
+        }
+        for(int j = 98; DataFile.getData().contains("Reports." + j); j++ ){
             if(inventory.getName().equals(Main.reportInv3.getName())){
-                if(e.getSlot() == j%99){
-                    if(j < 144){
+                if(e.getSlot() == j%98){
+                    if(j < 143){
                         String reports = DataFile.getData().getString("Reports." + j + ".Player");
                         String title = DataFile.getData().getString("Reports." + j + ".Title");
                         String description = DataFile.getData().getString("Reports." + j + ".Description");
@@ -137,6 +150,33 @@ public class Listeners implements Listener {
                         book.setItemMeta(bm);
                         p.getInventory().addItem(book);
                         p.sendMessage(Main.prefix + "Received Report # " + "§d" + j);
+                    }else if(j == 143){
+                        break;
+                    }
+                }
+            }
+        }
+        for(int j = 143; DataFile.getData().contains("Reports." + j); j++ ){
+            if(inventory.getName().equals(Main.reportInv4.getName())){
+                if(e.getSlot() == j%143){
+                    if(j < 188){
+                        String reports = DataFile.getData().getString("Reports." + j + ".Player");
+                        String title = DataFile.getData().getString("Reports." + j + ".Title");
+                        String description = DataFile.getData().getString("Reports." + j + ".Description");
+                        e.setCancelled(true);
+                        p.closeInventory();
+
+                        ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
+                        BookMeta bm = (BookMeta) book.getItemMeta();
+                        bm.setDisplayName("§dReport # " + j);
+                        bm.setPages("§dReport Number: " + j + "\n\n" +"§2Player: " + reports + "\n\n" +"§9Title: " + title + "\n\n" +"§6Description:" + "\n§0" + description);
+                        bm.setTitle(title);
+                        bm.setAuthor(reports);
+                        book.setItemMeta(bm);
+                        p.getInventory().addItem(book);
+                        p.sendMessage(Main.prefix + "Received Report # " + "§d" + j);
+                    }else if (j == 188){
+                        break;
                     }
                 }
             }

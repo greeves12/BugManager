@@ -48,7 +48,7 @@ public class LangFile {
         language = YamlConfiguration.loadConfiguration(lfile);
         language.addDefault("reminder-message", "&dIf you encounter a bug, please report it! &b/bugreport <title> <description>");
         language.addDefault("report-message", "&bThanks for reporting!");
-        language.addDefault("delete-message", "&aReport deleted");
+        language.addDefault("delete-message", "&aReport %report#% deleted");
         language.addDefault("noperm-message", "&cYou don't have access to this command!");
         language.addDefault("cooldown-message", "&cYou cannot report another bug for %secondsleft% more seconds");
         language.options().copyDefaults(true);

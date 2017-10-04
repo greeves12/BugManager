@@ -23,7 +23,7 @@ public class Reminder extends BukkitRunnable{
         if (Main.timeUntilStart == 0) {
             plugin.restartCountdown();
             for (Player p : Bukkit.getOnlinePlayers()) {
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + LangFile.getData().getString("reminder-message")));
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + LangFile.getData().getString("reminder-message")).replace("%n%", "\n"));
             }
         }
         Main.timeUntilStart -= 1;

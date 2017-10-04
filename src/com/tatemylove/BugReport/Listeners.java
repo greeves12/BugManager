@@ -71,6 +71,7 @@ public class Listeners implements Listener {
                 p.closeInventory();
                 Reports.createInv2();
                 p.openInventory(Main.reportInv2);
+                Main.users2.put(p.getUniqueId(), Main.reportInv2);
             }
         }
         for(int i = 53; DataFile.getData().contains("Reports." + i); i++){
@@ -103,6 +104,7 @@ public class Listeners implements Listener {
                 p.closeInventory();
                 Reports.createInv();
                 p.openInventory(Main.reportInv);
+                Main.users1.put(p.getUniqueId(), Main.reportInv);
             }
         }
         if(inventory.getName().equalsIgnoreCase(Main.reportInv2.getName())){
@@ -110,6 +112,7 @@ public class Listeners implements Listener {
                 p.closeInventory();
                 Reports.createInv3();
                 p.openInventory(Main.reportInv3);
+                Main.users3.put(p.getUniqueId(), Main.reportInv3);
             }
         }
         if(inventory.getName().equalsIgnoreCase(Main.reportInv3.getName())){
@@ -117,11 +120,13 @@ public class Listeners implements Listener {
                 p.closeInventory();
                 Reports.createInv2();
                 p.openInventory(Main.reportInv2);
+                Main.users2.put(p.getUniqueId(), Main.reportInv2);
             }
             if(e.getSlot() == 53){
                 p.closeInventory();
                 Reports.createInv4();
                 p.openInventory(Main.reportInv4);
+                Main.users4.put(p.getUniqueId(), Main.reportInv4);
             }
         }
         if(inventory.getName().equalsIgnoreCase(Main.reportInv4.getName())){
@@ -129,6 +134,7 @@ public class Listeners implements Listener {
                 p.closeInventory();
                 Reports.createInv3();
                 p.openInventory(Main.reportInv3);
+                Main.users3.put(p.getUniqueId(), Main.reportInv3);
             }
         }
         for(int j = 98; DataFile.getData().contains("Reports." + j); j++ ){

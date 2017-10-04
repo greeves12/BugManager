@@ -56,6 +56,7 @@ public class MainCommand implements CommandExecutor {
                     if (p.hasPermission("bugreport.view")) {
                         DataFile.reloadData();
                         p.openInventory(Main.reportInv);
+                        Main.users1.put(p.getUniqueId(), Main.reportInv);
                     } else {
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + LangFile.getData().getString("noperm-message")));
                     }

@@ -14,6 +14,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.UUID;
 
 
 /**
@@ -21,14 +23,17 @@ import java.util.ArrayList;
  */
 public class Main extends JavaPlugin{
     public static String prefix = "§d[Bug§bManager] ";
-    public static String version = "BugManager v1.3.2";
+    public static String version = "BugManager v1.3.5";
     private static int startCountdownId;
     public static int timeUntilStart;
     public static Inventory reportInv = Bukkit.createInventory(null, 54, "§dReports Page 1:");
     public static Inventory reportInv2 = Bukkit.createInventory(null, 54, "§dReports Page 2:");
     public static Inventory reportInv3 = Bukkit.createInventory(null, 54, "§dReports Page 3:");
     public static Inventory reportInv4 = Bukkit.createInventory(null, 54, "§dReports Page 4:");
-
+    public static HashMap<UUID, Inventory> users1 = new HashMap<>();
+    public static HashMap<UUID, Inventory> users2 = new HashMap<>();
+    public static HashMap<UUID, Inventory> users3 = new HashMap<>();
+    public static HashMap<UUID, Inventory> users4 = new HashMap<>();
 
 
 
@@ -49,6 +54,7 @@ public class Main extends JavaPlugin{
         cs.sendMessage("§5Latest Download is " + updater.getLatestName());
         cs.sendMessage("§b=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
         Bukkit.getServer().getPluginManager().registerEvents(new Listeners(this), this);
+        ThisPlugin.getPlugin().getConfig().options().copyDefaults(true);
         ThisPlugin.getPlugin().saveConfig();
         ThisPlugin.getPlugin().reloadConfig();
 

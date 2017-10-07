@@ -41,9 +41,10 @@ public class Listeners implements Listener {
     public void onInventoryClick(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
         Inventory inventory = e.getInventory();
-        for (int k = 0; DataFile.getData().contains("Reports." + k); k++) {
+        for (String i : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)) {
+            int k = Integer.parseInt(i);
             if (inventory.getName().equals(Main.reportInv.getName())) {
-                if(k < 53){
+                if(k < 52){
                 if (e.getSlot() == k) {
                     String reports = DataFile.getData().getString("Reports." + k + ".Player");
                     String title = DataFile.getData().getString("Reports." + k + ".Title");
@@ -61,7 +62,7 @@ public class Listeners implements Listener {
                     p.getInventory().addItem(book);
                     p.sendMessage(Main.prefix + "Received Report # " + "§d" + k);
                 }
-            }else if (k == 53) {
+            }else if (k == 52) {
                     break;
                 }
         }
@@ -74,10 +75,12 @@ public class Listeners implements Listener {
                 Main.users2.put(p.getUniqueId(), Main.reportInv2);
             }
         }
-        for(int i = 53; DataFile.getData().contains("Reports." + i); i++){
+        for(String k : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)){
+            int i = Integer.parseInt(k);
             if(inventory.getName().equals(Main.reportInv2.getName())){
-                if(e.getSlot() == i%53) {
-                    if (i < 98) {
+
+                    if (i >= 53) {
+                        if(e.getSlot() == i%53) {
                         String reports = DataFile.getData().getString("Reports." + i + ".Player");
                         String title = DataFile.getData().getString("Reports." + i + ".Title");
                         String description = DataFile.getData().getString("Reports." + i + ".Description");
@@ -93,7 +96,7 @@ public class Listeners implements Listener {
                         book.setItemMeta(bm);
                         p.getInventory().addItem(book);
                         p.sendMessage(Main.prefix + "Received Report # " + "§d" + i);
-                    }else if(i == 98){
+                    }else if(i == 97){
                         break;
                     }
                 }
@@ -137,10 +140,11 @@ public class Listeners implements Listener {
                 Main.users3.put(p.getUniqueId(), Main.reportInv3);
             }
         }
-        for(int j = 98; DataFile.getData().contains("Reports." + j); j++ ){
+        for(String k : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)){
+            int j = Integer.parseInt(k);
             if(inventory.getName().equals(Main.reportInv3.getName())){
-                if(e.getSlot() == j%98){
-                    if(j < 143){
+                    if(j >= 98){
+                        if(e.getSlot() == j%98){
                         String reports = DataFile.getData().getString("Reports." + j + ".Player");
                         String title = DataFile.getData().getString("Reports." + j + ".Title");
                         String description = DataFile.getData().getString("Reports." + j + ".Description");
@@ -156,16 +160,17 @@ public class Listeners implements Listener {
                         book.setItemMeta(bm);
                         p.getInventory().addItem(book);
                         p.sendMessage(Main.prefix + "Received Report # " + "§d" + j);
-                    }else if(j == 143){
+                    }else if(j == 142){
                         break;
                     }
                 }
             }
         }
-        for(int j = 143; DataFile.getData().contains("Reports." + j); j++ ){
+        for(String k : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)){
             if(inventory.getName().equals(Main.reportInv4.getName())){
-                if(e.getSlot() == j%143){
-                    if(j < 188){
+                int j = Integer.parseInt(k);
+                    if(j >= 143){
+                        if(e.getSlot() == j%143){
                         String reports = DataFile.getData().getString("Reports." + j + ".Player");
                         String title = DataFile.getData().getString("Reports." + j + ".Title");
                         String description = DataFile.getData().getString("Reports." + j + ".Description");
@@ -181,7 +186,7 @@ public class Listeners implements Listener {
                         book.setItemMeta(bm);
                         p.getInventory().addItem(book);
                         p.sendMessage(Main.prefix + "Received Report # " + "§d" + j);
-                    }else if (j == 188){
+                    }else if (j == 187){
                         break;
                     }
                 }

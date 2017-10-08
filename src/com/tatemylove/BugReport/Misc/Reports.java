@@ -23,6 +23,8 @@ public class Reports {
 
 
     public static void fileReport(Player p, String title, String desc) {
+        Calendar cal = Calendar.getInstance();
+
         if (coolDown.containsKey(p.getName())) {
                 long secondsLeft = ((coolDown.get(p.getName()) / 1000) + cooldown) - (System.currentTimeMillis() / 1000);
                 if (secondsLeft > 0) {
@@ -37,18 +39,19 @@ public class Reports {
 
             TreeMap<Integer, Integer> numbers = new TreeMap();
             for (int k = 0; DataFile.getData().contains("Reports." + k); k++) {
-                numbers.put(Integer.valueOf(k), Integer.valueOf(k));
+                numbers.put(k, k);
             }
 
             if (numbers.size() == 0) {
                 newID = 0;
             } else {
-                newID = ((Integer) numbers.lastEntry().getValue()).intValue() + 1;
+                newID = (Integer) numbers.lastEntry().getValue() + 1;
             }
 
             DataFile.getData().set("Reports." + newID + ".Player", p.getName());
             DataFile.getData().set("Reports." + newID + ".Title", title);
             DataFile.getData().set("Reports." + newID + ".Description", desc);
+            DataFile.getData().set("Reports." + newID + ".Time", cal);
             DataFile.saveData();
             DataFile.reloadData();
             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + LangFile.getData().getString("report-message")));
@@ -93,12 +96,14 @@ public class Reports {
             if(j >=0) {
                 String player = DataFile.getData().getString("Reports." + Integer.parseInt(k) + ".Player");
                 String title = DataFile.getData().getString("Reports." + Integer.parseInt(k) + ".Title");
+                String cal = DataFile.getData().getString("Reports." + j + ".Time");
                 ItemStack Stack = new ItemStack(Material.BOOK, 1);
                 ItemMeta meta = Stack.getItemMeta();
                 ArrayList<String> lore = new ArrayList<String>();
-                meta.setDisplayName("§aReport Number: §d" + Integer.parseInt(k));
-                lore.add(("By: " + player));
-                lore.add(("Title: " + title));
+                meta.setDisplayName("§bReport Number: §d" + Integer.parseInt(k));
+                lore.add(("§8By: §a" + player));
+                lore.add(("§8Title: §a" + title));
+                lore.add("§8Time: §a" + cal);
                 meta.setLore(lore);
                 Stack.setItemMeta(meta);
                 Main.reportInv.setItem(Integer.parseInt(k), Stack);
@@ -121,12 +126,14 @@ public class Reports {
                     if(j >= 53) {
                         String player = DataFile.getData().getString("Reports." + j + ".Player");
                         String title = DataFile.getData().getString("Reports." + j + ".Title");
+                        String cal = DataFile.getData().getString("Reports." + j + ".Time");
                         ItemStack Stack = new ItemStack(Material.BOOK, 1);
                         ItemMeta meta = Stack.getItemMeta();
                         ArrayList<String> lore = new ArrayList<String>();
-                        meta.setDisplayName("§aReport Number: §d" + j);
-                        lore.add(("By: " + player));
-                        lore.add(("Title: " + title));
+                        meta.setDisplayName("§bReport Number: §d" + j);
+                        lore.add(("§8By: §a" + player));
+                        lore.add(("§8Title: §a" + title));
+                        lore.add("§8Time: §a" + cal);
                         meta.setLore(lore);
                         Stack.setItemMeta(meta);
                         Main.reportInv2.setItem(j % 53, Stack);
@@ -155,12 +162,14 @@ public class Reports {
             if(j >= 98){
                 String player = DataFile.getData().getString("Reports." + j + ".Player");
                 String title = DataFile.getData().getString("Reports." + j + ".Title");
+                String cal = DataFile.getData().getString("Reports." + j + ".Time");
                 ItemStack Stack = new ItemStack(Material.BOOK, 1);
                 ItemMeta meta = Stack.getItemMeta();
                 ArrayList<String> lore = new ArrayList<String>();
-                meta.setDisplayName("§aReport Number: §d" + j);
-                lore.add(("By: " + player));
-                lore.add(("Title: " + title));
+                meta.setDisplayName("§bReport Number: §d" + j);
+                lore.add(("§8By: §a" + player));
+                lore.add(("§8Title: §a" + title));
+                lore.add("§8Time: §a" + cal);
                 meta.setLore(lore);
                 Stack.setItemMeta(meta);
                 Main.reportInv3.setItem(j % 98, Stack);
@@ -190,12 +199,14 @@ public class Reports {
             if(j >= 143) {
                 String player = DataFile.getData().getString("Reports." + j + ".Player");
                 String title = DataFile.getData().getString("Reports." + j + ".Title");
+                String cal = DataFile.getData().getString("Reports." + j + ".Time");
                 ItemStack Stack = new ItemStack(Material.BOOK, 1);
                 ItemMeta meta = Stack.getItemMeta();
                 ArrayList<String> lore = new ArrayList<String>();
-                meta.setDisplayName("§aReport Number: §d" + j);
-                lore.add(("By: " + player));
-                lore.add(("Title: " + title));
+                meta.setDisplayName("§bReport Number: §d" + j);
+                lore.add(("§8By: §a" + player));
+                lore.add(("§8Title: §a" + title));
+                lore.add("§8Time: §a" + cal);
                 meta.setLore(lore);
                 Stack.setItemMeta(meta);
                 Main.reportInv4.setItem(j % 143, Stack);

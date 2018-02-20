@@ -25,10 +25,10 @@ public class MainCommand implements CommandExecutor {
         if (sender instanceof Player) {
             Player p = (Player) sender;
             if (args.length == 0) {
-                p.sendMessage("§6Please use /bugreport help for assistance");
-                p.sendMessage("§6Plugin version " + Main.version);
-                p.sendMessage("§6Developers: tatemylove (greeves12)");
-                p.sendMessage("§dThe bukkit page: §bhttps://dev.bukkit.org/projects/bugmanager");
+                p.sendMessage("§4§m |   »* |   >»  §r  §6[ §cBugManager §6]  §4§m  «<   | *«   | §r\"");
+                p.sendMessage("§8§lPlugin version: §e" + Main.version);
+                p.sendMessage("§2§lDevelopers: §btatemylove (greeves12)");
+                p.sendMessage("§7§lCommands: §6/report help");
             }
             if (args.length >= 1) {
                 if (args[0].equalsIgnoreCase("create")) {
@@ -56,10 +56,10 @@ public class MainCommand implements CommandExecutor {
                     if (p.hasPermission("bugreport.view")) {
                         if(DataFile.getData().contains("Reports.0")) {
                             DataFile.reloadData();
-                            p.openInventory(Main.reportInv);
-                            Main.users1.put(p.getUniqueId(), Main.reportInv);
+                            Reports.createInv(p);
+
                         }else{
-                            p.sendMessage(Main.prefix + "§bNo bug reports found!");
+                            p.sendMessage(Main.prefix + "§eNo bug reports found!");
                         }
                     } else {
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + LangFile.getData().getString("noperm-message")));

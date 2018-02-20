@@ -4,7 +4,12 @@ import com.tatemylove.BugReport.Files.DataFile;
 import com.tatemylove.BugReport.Misc.ConfigEditor;
 import com.tatemylove.BugReport.Misc.Reports;
 import com.tatemylove.BugReport.Plugin.ThisPlugin;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
+import net.minecraft.server.v1_12_R1.PacketDataSerializer;
+import net.minecraft.server.v1_12_R1.PacketPlayOutCustomPayload;
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.v1_12_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -25,6 +30,13 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
+    public void onJoin(PlayerJoinEvent e){
+        if(!Reports.coolDown.containsKey(e.getPlayer().getUniqueId())){
+            Reports.coolDown.put(e.getPlayer().getUniqueId(), 0L);
+        }
+    }
+
+    @EventHandler
     public void onInventoryClick(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
         Inventory inventory = e.getInventory();
@@ -33,6 +45,8 @@ public class Listeners implements Listener {
             if (inventory.getName().equals(Main.reportInv.getName())) {
                 if(k < 52){
                 if (e.getSlot() == k) {
+
+
                     String reports = DataFile.getData().getString("Reports." + k + ".Player");
                     String title = DataFile.getData().getString("Reports." + k + ".Title");
                     String description = DataFile.getData().getString("Reports." + k + ".Description");
@@ -46,7 +60,21 @@ public class Listeners implements Listener {
                     bm.setTitle(title);
                     bm.setAuthor(reports);
                     book.setItemMeta(bm);
-                    p.getInventory().addItem(book);
+
+                    int slot = p.getInventory().getHeldItemSlot();
+                    ItemStack old = p.getInventory().getItem(slot);
+
+                    p.getInventory().setItem(slot, book);
+
+                    ByteBuf buf = Unpooled.buffer(256);
+                    buf.setByte(0, (byte)0);
+                    buf.writerIndex(1);
+
+                    PacketPlayOutCustomPayload packet = new PacketPlayOutCustomPayload("MC|BOpen", new PacketDataSerializer(buf));
+                    CraftPlayer cp = (CraftPlayer)p;
+                    cp.getHandle().playerConnection.sendPacket(packet);
+
+                    p.getInventory().setItem(slot, old);
                     p.sendMessage(Main.prefix + "Received Report # " + "§d" + k);
                 }
             }else if (k == 52) {
@@ -57,9 +85,9 @@ public class Listeners implements Listener {
         if(inventory.getName().equals(Main.reportInv.getName())){
             if(e.getSlot() == 53){
                 p.closeInventory();
-                Reports.createInv2();
-                p.openInventory(Main.reportInv2);
-                Main.users2.put(p.getUniqueId(), Main.reportInv2);
+                Reports.createInv2(p);
+                //p.openInventory(Main.reportInv2);
+
             }
         }
         for(String k : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)){
@@ -81,7 +109,20 @@ public class Listeners implements Listener {
                         bm.setTitle(title);
                         bm.setAuthor(reports);
                         book.setItemMeta(bm);
-                        p.getInventory().addItem(book);
+                            int slot = p.getInventory().getHeldItemSlot();
+                            ItemStack old = p.getInventory().getItem(slot);
+
+                            p.getInventory().setItem(slot, book);
+
+                            ByteBuf buf = Unpooled.buffer(256);
+                            buf.setByte(0, (byte)0);
+                            buf.writerIndex(1);
+
+                            PacketPlayOutCustomPayload packet = new PacketPlayOutCustomPayload("MC|BOpen", new PacketDataSerializer(buf));
+                            CraftPlayer cp = (CraftPlayer)p;
+                            cp.getHandle().playerConnection.sendPacket(packet);
+
+                            p.getInventory().setItem(slot, old);
                         p.sendMessage(Main.prefix + "Received Report # " + "§d" + i);
                     }else if(i == 97){
                         break;
@@ -92,39 +133,39 @@ public class Listeners implements Listener {
         if(inventory.getName().equals(Main.reportInv2.getName())){
             if(e.getSlot() == 45){
                 p.closeInventory();
-                Reports.createInv();
-                p.openInventory(Main.reportInv);
-                Main.users1.put(p.getUniqueId(), Main.reportInv);
+                Reports.createInv(p);
+                //p.openInventory(Main.reportInv);
+
             }
         }
         if(inventory.getName().equalsIgnoreCase(Main.reportInv2.getName())){
             if(e.getSlot() == 53){
                 p.closeInventory();
-                Reports.createInv3();
-                p.openInventory(Main.reportInv3);
-                Main.users3.put(p.getUniqueId(), Main.reportInv3);
+                Reports.createInv3(p);
+                //p.openInventory(Main.reportInv3);
+
             }
         }
         if(inventory.getName().equalsIgnoreCase(Main.reportInv3.getName())){
             if(e.getSlot() == 45){
                 p.closeInventory();
-                Reports.createInv2();
-                p.openInventory(Main.reportInv2);
-                Main.users2.put(p.getUniqueId(), Main.reportInv2);
+                Reports.createInv2(p);
+               // p.openInventory(Main.reportInv2);
+
             }
             if(e.getSlot() == 53){
                 p.closeInventory();
-                Reports.createInv4();
-                p.openInventory(Main.reportInv4);
-                Main.users4.put(p.getUniqueId(), Main.reportInv4);
+                Reports.createInv4(p);
+                //p.openInventory(Main.reportInv4);
+
             }
         }
         if(inventory.getName().equalsIgnoreCase(Main.reportInv4.getName())){
             if(e.getSlot() == 45){
                 p.closeInventory();
-                Reports.createInv3();
-                p.openInventory(Main.reportInv3);
-                Main.users3.put(p.getUniqueId(), Main.reportInv3);
+                Reports.createInv3(p);
+                //p.openInventory(Main.reportInv3);
+
             }
         }
         for(String k : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)){
@@ -145,7 +186,20 @@ public class Listeners implements Listener {
                         bm.setTitle(title);
                         bm.setAuthor(reports);
                         book.setItemMeta(bm);
-                        p.getInventory().addItem(book);
+                            int slot = p.getInventory().getHeldItemSlot();
+                            ItemStack old = p.getInventory().getItem(slot);
+
+                            p.getInventory().setItem(slot, book);
+
+                            ByteBuf buf = Unpooled.buffer(256);
+                            buf.setByte(0, (byte)0);
+                            buf.writerIndex(1);
+
+                            PacketPlayOutCustomPayload packet = new PacketPlayOutCustomPayload("MC|BOpen", new PacketDataSerializer(buf));
+                            CraftPlayer cp = (CraftPlayer)p;
+                            cp.getHandle().playerConnection.sendPacket(packet);
+
+                            p.getInventory().setItem(slot, old);
                         p.sendMessage(Main.prefix + "Received Report # " + "§d" + j);
                     }else if(j == 142){
                         break;
@@ -171,7 +225,20 @@ public class Listeners implements Listener {
                         bm.setTitle(title);
                         bm.setAuthor(reports);
                         book.setItemMeta(bm);
-                        p.getInventory().addItem(book);
+                            int slot = p.getInventory().getHeldItemSlot();
+                            ItemStack old = p.getInventory().getItem(slot);
+
+                            p.getInventory().setItem(slot, book);
+
+                            ByteBuf buf = Unpooled.buffer(256);
+                            buf.setByte(0, (byte)0);
+                            buf.writerIndex(1);
+
+                            PacketPlayOutCustomPayload packet = new PacketPlayOutCustomPayload("MC|BOpen", new PacketDataSerializer(buf));
+                            CraftPlayer cp = (CraftPlayer)p;
+                            cp.getHandle().playerConnection.sendPacket(packet);
+
+                            p.getInventory().setItem(slot, old);
                         p.sendMessage(Main.prefix + "Received Report # " + "§d" + j);
                     }else if (j == 187){
                         break;
@@ -268,6 +335,7 @@ public class Listeners implements Listener {
                 ConfigEditor.createReminder();
                 p.openInventory(ConfigEditor.configReminder);
                 p.sendMessage(Main.prefix + "§aSuccessfully changed reminder-interval to: §5" + this.plugin.getConfig().getInt("reminder-interval"));
+
             }
             if(e.getSlot() == 15){
                 int current = ThisPlugin.getPlugin().getConfig().getInt("reminder-interval");

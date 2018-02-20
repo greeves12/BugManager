@@ -62,7 +62,6 @@ public class DataFile
     public static void reloadData()
     {
         bug = YamlConfiguration.loadConfiguration(afile);
-        Reports.createInv();
         ConfigEditor.createConfig();
     }
 

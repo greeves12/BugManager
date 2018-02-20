@@ -2,3 +2,4 @@ reminder-interval: 300
 join-message: true
 cool-down: 300
 auto-update: true
+config-version: 2.0.1

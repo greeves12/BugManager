@@ -24,19 +24,6 @@ public class Listeners implements Listener {
         plugin = pl;
     }
 
-
-    @EventHandler
-    public void onJoin(PlayerJoinEvent e){
-        if(e.getPlayer().hasPermission("bugreport.joinmes")) {
-            if (this.plugin.getConfig().getBoolean("join-message") == true) {
-                Player p = e.getPlayer();
-                p.sendMessage(Main.prefix + "§cYou are running " + Main.version);
-                this.plugin.checkUpdate(p);
-                p.sendMessage(Main.prefix + "§aTo update type /bugreport update");
-            }
-        }
-    }
-
     @EventHandler
     public void onInventoryClick(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();

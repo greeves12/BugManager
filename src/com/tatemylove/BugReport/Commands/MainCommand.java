@@ -54,9 +54,13 @@ public class MainCommand implements CommandExecutor {
                     }
                 if (args[0].equalsIgnoreCase("view")) {
                     if (p.hasPermission("bugreport.view")) {
-                        DataFile.reloadData();
-                        p.openInventory(Main.reportInv);
-                        Main.users1.put(p.getUniqueId(), Main.reportInv);
+                        if(DataFile.getData().contains("Reports.0")) {
+                            DataFile.reloadData();
+                            p.openInventory(Main.reportInv);
+                            Main.users1.put(p.getUniqueId(), Main.reportInv);
+                        }else{
+                            p.sendMessage(Main.prefix + "§bNo bug reports found!");
+                        }
                     } else {
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + LangFile.getData().getString("noperm-message")));
                     }
@@ -86,14 +90,7 @@ public class MainCommand implements CommandExecutor {
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + LangFile.getData().getString("noperm-message")));
                     }
                 }
-                if (args[0].equalsIgnoreCase("update")) {
-                    if (p.hasPermission("bugreport.update")) {
-                        this.plugin.updatePlugin();
-                        p.sendMessage(Main.prefix + "Update successfull! Changes will take action next server restart");
-                    } else {
-                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + LangFile.getData().getString("noperm-message")));
-                    }
-                }
+
                 if(args[0].equalsIgnoreCase("config")){
                     if(p.hasPermission("bugreport.config")){
                         DataFile.reloadData();
@@ -102,10 +99,7 @@ public class MainCommand implements CommandExecutor {
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + LangFile.getData().getString("noperm-message")));
                     }
                 }
-                if (args[0].equalsIgnoreCase("check")) {
-                    this.plugin.checkUpdate(p);
-                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + LangFile.getData().getString("noperm-message")));
-                }
+
 
             }
             return true;

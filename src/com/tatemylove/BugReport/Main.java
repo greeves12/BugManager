@@ -6,7 +6,7 @@ import com.tatemylove.BugReport.Files.LangFile;
 import com.tatemylove.BugReport.Misc.Reminder;
 
 import com.tatemylove.BugReport.Plugin.ThisPlugin;
-import com.tatemylove.BugReport.Updater.Updater;
+import com.tatemylove.BugReport.Updater.CheckUpdate;
 import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
@@ -23,7 +23,7 @@ import java.util.UUID;
  */
 public class Main extends JavaPlugin{
     public static String prefix = "§d[Bug§bManager] ";
-    public static String version = "BugManager v1.3.7";
+    public static String version = "2.0.0";
     private static int startCountdownId;
     public static int timeUntilStart;
     public static Inventory reportInv = Bukkit.createInventory(null, 54, "§dReports Page 1:");
@@ -39,11 +39,7 @@ public class Main extends JavaPlugin{
 
     public void onEnable() {
 
-        if(getConfig().getBoolean("auto-update") == true){
-            Updater updater = new Updater(this, 277007, this.getFile(), Updater.UpdateType.DEFAULT, true);
-        }
 
-        Updater updater = new Updater(this, 277007, this.getFile(), Updater.UpdateType.NO_DOWNLOAD, false);
         startCountDown();
         ConsoleCommandSender cs = getServer().getConsoleSender();
         cs.sendMessage("§b=-=-=-Bug-Manager-=-=-=-");
@@ -51,7 +47,6 @@ public class Main extends JavaPlugin{
         cs.sendMessage("§6Do not claim this code as yours");
         cs.sendMessage("§6Altering this code, is an infringement under the copyright act");
         cs.sendMessage("§dYou are running version: " + version + " §aby: greeves12");
-        cs.sendMessage("§5Latest Download is " + updater.getLatestName());
         cs.sendMessage("§b=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
         Bukkit.getServer().getPluginManager().registerEvents(new Listeners(this), this);
         ThisPlugin.getPlugin().getConfig().options().copyDefaults(true);
@@ -63,11 +58,13 @@ public class Main extends JavaPlugin{
 
         MainCommand cmd = new MainCommand(this);
         getCommand("bugreport").setExecutor(cmd);
+        getCommand("report").setExecutor(cmd);
+
+        CheckUpdate update = new CheckUpdate();
+        update.autoUpdate();
 
     }
-    public void updatePlugin(){
-        Updater updater = new Updater(this, 277007, this.getFile(), Updater.UpdateType.NO_VERSION_CHECK, true);
-    }
+
 
     public void startCountDown() {
         startCountdownId = getServer().getScheduler().scheduleSyncRepeatingTask((this), new Reminder(this), 0L, 20L);
@@ -80,9 +77,6 @@ public class Main extends JavaPlugin{
         stopCountDown();
         startCountDown();
     }
-    public void checkUpdate(Player p){
-        Updater updater = new Updater(this, 277007, this.getFile(), Updater.UpdateType.NO_DOWNLOAD, false);
-            p.sendMessage(Main.prefix + "§dLatest Download is " + updater.getLatestName());
-    }
+
 
 }

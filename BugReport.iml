@@ -5,16 +5,16 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Desktop/BuildTools/craftbukkit.jar!/" />
+          <root url="jar://$USER_HOME$/Desktop/BuildTools/craftbukkit-1.12.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://$USER_HOME$/Desktop/BuildTools/craftbukkit.jar!/" />
+          <root url="jar://$USER_HOME$/Desktop/BuildTools/craftbukkit-1.12.2.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>

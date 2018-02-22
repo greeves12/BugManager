@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -68,6 +69,41 @@ public class Listeners implements Listener {
                     int k = Integer.parseInt(i);
                     int num = e.getSlot()+53;
                     if(k <= 97){
+                        if(DataFile.getData().contains("Reports." + num)){
+                            DataFile.getData().set("Reports." + num, null);
+                            DataFile.saveData();
+                            DataFile.reloadData();
+                            p.closeInventory();
+                            p.sendMessage(Main.prefix + "§aReport # §e" + num + " deleted!");
+                            Reports.createInv(p);
+                        }
+                    }
+                }
+            }
+        }else if(inventory.getName().equals(Main.reportInv3.getName())){
+            if(e.isRightClick()){
+                for(String i : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)){
+                    int k = Integer.parseInt(i);
+                    int num = e.getSlot()+98;
+                    if(k <= 142){
+                        if(DataFile.getData().contains("Reports." + num)){
+                            DataFile.getData().set("Reports." + num, null);
+                            DataFile.saveData();
+                            DataFile.reloadData();
+                            p.closeInventory();
+                            p.sendMessage(Main.prefix + "§aReport # §e" + num + " deleted!");
+                            Reports.createInv(p);
+                        }
+                    }
+                }
+            }
+        }else if(inventory.getName().equals(Main.reportInv4.getName())){
+            if(e.isRightClick()){
+                for(String i : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)){
+                    int k = Integer.parseInt(i);
+                    int num = e.getSlot()+143;
+
+                    if(k <= 187){
                         if(DataFile.getData().contains("Reports." + num)){
                             DataFile.getData().set("Reports." + num, null);
                             DataFile.saveData();
@@ -558,6 +594,13 @@ public class Listeners implements Listener {
                 ConfigEditor.createConfig();
                 p.openInventory(ConfigEditor.configInv);
             }
+        }
+    }
+    @EventHandler
+    public void cancelReload(PlayerCommandPreprocessEvent e){
+        if(e.getMessage().equals("/reload")){
+            e.setCancelled(true);
+            e.getPlayer().sendMessage(Main.prefix + "§eReload command is blocked by BugManager.");
         }
     }
 }

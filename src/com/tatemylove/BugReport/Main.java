@@ -22,8 +22,8 @@ import java.util.UUID;
  * Created by Tate on 9/3/2017.
  */
 public class Main extends JavaPlugin{
-    public static String prefix = "§d[Bug§bManager] ";
-    public static String version = "2.0.2";
+    public static final String prefix = "§d[Bug§bManager] ";
+    public static final String version = "2.0.2";
     private static int startCountdownId;
     public static int timeUntilStart;
     public static Inventory reportInv = Bukkit.createInventory(null, 54, "§dReports Page 1:");

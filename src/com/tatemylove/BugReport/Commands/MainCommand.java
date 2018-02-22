@@ -5,11 +5,16 @@ import com.tatemylove.BugReport.Files.LangFile;
 import com.tatemylove.BugReport.Main;
 import com.tatemylove.BugReport.Misc.ConfigEditor;
 import com.tatemylove.BugReport.Misc.Reports;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 
 
 /**
@@ -54,13 +59,8 @@ public class MainCommand implements CommandExecutor {
                     }
                 if (args[0].equalsIgnoreCase("view")) {
                     if (p.hasPermission("bugreport.view")) {
-                        if(DataFile.getData().contains("Reports.0")) {
-                            DataFile.reloadData();
-                            Reports.createInv(p);
 
-                        }else{
-                            p.sendMessage(Main.prefix + "§eNo bug reports found!");
-                        }
+                       Reports.createInv(p);
                     } else {
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + LangFile.getData().getString("noperm-message")));
                     }

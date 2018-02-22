@@ -13,6 +13,9 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.*;
 
 /**
@@ -59,6 +62,12 @@ public class Reports {
                 DataFile.reloadData();
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + LangFile.getData().getString("report-message")));
 
+                for(Player pp : Bukkit.getOnlinePlayers()){
+                    if(pp.hasPermission("bugreport.notify")){
+                        pp.sendMessage(Main.prefix + "§a" + p.getName() + " §afiled a report §a#: " + newID);
+                    }
+                }
+
             }else{
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + LangFile.getData().getString("cooldown-message").replaceAll("%secondsleft%", String.valueOf(secondsLeft))));
             }
@@ -97,42 +106,49 @@ public class Reports {
 
     public static void createInv(Player p) {
         Main.reportInv = Bukkit.createInventory(p, 54, "§dReports Page 1:");
-        if (DataFile.getData().contains("Reports." + 0)) {
-            for (String k : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)) {
-                int j = Integer.parseInt(k);
-                //if (!hasPlayer.containsKey(p.getName())) {
+        File file = new File("plugins/BugReport/data.yml");
+        try{
+            BufferedReader bf = new BufferedReader(new FileReader(file));
+            if(bf.readLine() != null){
+                for (String k : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)) {
+                    int j = Integer.parseInt(k);
+                    //if (!hasPlayer.containsKey(p.getName())) {
 
-                if (j >= 0) {
-                    String player = DataFile.getData().getString("Reports." + Integer.parseInt(k) + ".Player");
-                    String title = DataFile.getData().getString("Reports." + Integer.parseInt(k) + ".Title");
-                    String cal = DataFile.getData().getString("Reports." + j + ".Time");
-                    ItemStack Stack = new ItemStack(Material.BOOK, 1);
-                    ItemMeta meta = Stack.getItemMeta();
-                    ArrayList<String> lore = new ArrayList<String>();
-                    meta.setDisplayName("§bReport Number: §d" + Integer.parseInt(k));
-                    lore.add("§6<Right Click To Delete>");
-                    lore.add(("§8By: §a" + player));
-                    lore.add(("§8Title: §a" + title));
-                    lore.add("§8Time: §a" + cal);
-                    meta.setLore(lore);
-                    Stack.setItemMeta(meta);
-                    Main.reportInv.setItem(Integer.parseInt(k), Stack);
-                    if (j == 52) {
-                        break;
+                    if (j >= 0) {
+                        String player = DataFile.getData().getString("Reports." + Integer.parseInt(k) + ".Player");
+                        String title = DataFile.getData().getString("Reports." + Integer.parseInt(k) + ".Title");
+                        String cal = DataFile.getData().getString("Reports." + j + ".Time");
+                        ItemStack Stack = new ItemStack(Material.BOOK, 1);
+                        ItemMeta meta = Stack.getItemMeta();
+                        ArrayList<String> lore = new ArrayList<String>();
+                        meta.setDisplayName("§bReport Number: §d" + Integer.parseInt(k));
+                        lore.add("§6<Right Click To Delete>");
+                        lore.add(("§8By: §a" + player));
+                        lore.add(("§8Title: §a" + title));
+                        lore.add("§8Time: §a" + cal);
+                        meta.setLore(lore);
+                        Stack.setItemMeta(meta);
+                        Main.reportInv.setItem(Integer.parseInt(k), Stack);
+                        if (j == 52) {
+                            break;
+                        }
                     }
                 }
-            }
-            ItemStack anvil = new ItemStack(Material.ANVIL, 1);
-            ItemMeta Meta = anvil.getItemMeta();
-            Meta.setDisplayName("§bNext Page");
-            anvil.setItemMeta(Meta);
-            Main.reportInv.setItem(53, anvil);
+                ItemStack anvil = new ItemStack(Material.ANVIL, 1);
+                ItemMeta Meta = anvil.getItemMeta();
+                Meta.setDisplayName("§bNext Page");
+                anvil.setItemMeta(Meta);
+                Main.reportInv.setItem(53, anvil);
 
-            p.openInventory(Main.reportInv);
-        }else{
-            p.sendMessage(Main.prefix + "§bNo reports found!");
+                p.openInventory(Main.reportInv);
+            }else{
+                p.sendMessage(Main.prefix + "§eNo bug reports found!");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
-    }
+
+        }
 
    // }
 

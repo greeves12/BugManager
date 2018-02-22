@@ -75,7 +75,7 @@ public class Listeners implements Listener {
                             DataFile.reloadData();
                             p.closeInventory();
                             p.sendMessage(Main.prefix + "§aReport # §e" + num + " deleted!");
-                            Reports.createInv(p);
+                            Reports.createInv2(p);
                         }
                     }
                 }
@@ -92,7 +92,7 @@ public class Listeners implements Listener {
                             DataFile.reloadData();
                             p.closeInventory();
                             p.sendMessage(Main.prefix + "§aReport # §e" + num + " deleted!");
-                            Reports.createInv(p);
+                            Reports.createInv3(p);
                         }
                     }
                 }
@@ -110,7 +110,7 @@ public class Listeners implements Listener {
                             DataFile.reloadData();
                             p.closeInventory();
                             p.sendMessage(Main.prefix + "§aReport # §e" + num + " deleted!");
-                            Reports.createInv(p);
+                            Reports.createInv4(p);
                         }
                     }
                 }

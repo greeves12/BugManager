@@ -97,9 +97,10 @@ public class Reports {
 
     public static void createInv(Player p) {
         Main.reportInv = Bukkit.createInventory(p, 54, "§dReports Page 1:");
-        for (String k : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)) {
-            int j = Integer.parseInt(k);
-            //if (!hasPlayer.containsKey(p.getName())) {
+        if (DataFile.getData().contains("Reports." + 0)) {
+            for (String k : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)) {
+                int j = Integer.parseInt(k);
+                //if (!hasPlayer.containsKey(p.getName())) {
 
                 if (j >= 0) {
                     String player = DataFile.getData().getString("Reports." + Integer.parseInt(k) + ".Player");
@@ -109,6 +110,7 @@ public class Reports {
                     ItemMeta meta = Stack.getItemMeta();
                     ArrayList<String> lore = new ArrayList<String>();
                     meta.setDisplayName("§bReport Number: §d" + Integer.parseInt(k));
+                    lore.add("§6<Right Click To Delete>");
                     lore.add(("§8By: §a" + player));
                     lore.add(("§8Title: §a" + title));
                     lore.add("§8Time: §a" + cal);
@@ -126,8 +128,11 @@ public class Reports {
             anvil.setItemMeta(Meta);
             Main.reportInv.setItem(53, anvil);
 
-        p.openInventory(Main.reportInv);
+            p.openInventory(Main.reportInv);
+        }else{
+            p.sendMessage(Main.prefix + "§bNo reports found!");
         }
+    }
 
    // }
 
@@ -145,6 +150,7 @@ public class Reports {
                     ItemMeta meta = Stack.getItemMeta();
                     ArrayList<String> lore = new ArrayList<String>();
                     meta.setDisplayName("§bReport Number: §d" + j);
+                    lore.add("§6<Right Click To Delete>");
                     lore.add(("§8By: §a" + player));
                     lore.add(("§8Title: §a" + title));
                     lore.add("§8Time: §a" + cal);
@@ -188,6 +194,7 @@ public class Reports {
                     ItemMeta meta = Stack.getItemMeta();
                     ArrayList<String> lore = new ArrayList<String>();
                     meta.setDisplayName("§bReport Number: §d" + j);
+                    lore.add("§6<Right Click To Delete>");
                     lore.add(("§8By: §a" + player));
                     lore.add(("§8Title: §a" + title));
                     lore.add("§8Time: §a" + cal);
@@ -231,6 +238,7 @@ public class Reports {
                     ItemMeta meta = Stack.getItemMeta();
                     ArrayList<String> lore = new ArrayList<String>();
                     meta.setDisplayName("§bReport Number: §d" + j);
+                    lore.add("§6<Right Click To Delete>");
                     lore.add(("§8By: §a" + player));
                     lore.add(("§8Title: §a" + title));
                     lore.add("§8Time: §a" + cal);

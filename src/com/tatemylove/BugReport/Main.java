@@ -23,7 +23,7 @@ import java.util.UUID;
  */
 public class Main extends JavaPlugin{
     public static String prefix = "§d[Bug§bManager] ";
-    public static String version = "2.0.1";
+    public static String version = "2.0.2";
     private static int startCountdownId;
     public static int timeUntilStart;
     public static Inventory reportInv = Bukkit.createInventory(null, 54, "§dReports Page 1:");

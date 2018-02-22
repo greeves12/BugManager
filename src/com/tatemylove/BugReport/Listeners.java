@@ -40,212 +40,255 @@ public class Listeners implements Listener {
     public void onInventoryClick(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
         Inventory inventory = e.getInventory();
-        for (String i : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)) {
-            int k = Integer.parseInt(i);
-            if (inventory.getName().equals(Main.reportInv.getName())) {
-                if(k < 52){
-                if (e.getSlot() == k) {
 
+        ItemStack b = new ItemStack(Material.BOOK,1);
 
-                    String reports = DataFile.getData().getString("Reports." + k + ".Player");
-                    String title = DataFile.getData().getString("Reports." + k + ".Title");
-                    String description = DataFile.getData().getString("Reports." + k + ".Description");
-                    e.setCancelled(true);
-                    p.closeInventory();
-
-                    ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
-                    BookMeta bm = (BookMeta) book.getItemMeta();
-                    bm.setDisplayName("§dReport # " + k);
-                    bm.setPages("§dReport Number: " + k + "\n\n" +"§2Player: " + reports + "\n\n" +"§9Title: " + title + "\n\n" +"§6Description:" + "\n§0" + description);
-                    bm.setTitle(title);
-                    bm.setAuthor(reports);
-                    book.setItemMeta(bm);
-
-                    int slot = p.getInventory().getHeldItemSlot();
-                    ItemStack old = p.getInventory().getItem(slot);
-
-                    p.getInventory().setItem(slot, book);
-
-                    ByteBuf buf = Unpooled.buffer(256);
-                    buf.setByte(0, (byte)0);
-                    buf.writerIndex(1);
-
-                    PacketPlayOutCustomPayload packet = new PacketPlayOutCustomPayload("MC|BOpen", new PacketDataSerializer(buf));
-                    CraftPlayer cp = (CraftPlayer)p;
-                    cp.getHandle().playerConnection.sendPacket(packet);
-
-                    p.getInventory().setItem(slot, old);
-                    p.sendMessage(Main.prefix + "Received Report # " + "§d" + k);
-                }
-            }else if (k == 52) {
-                    break;
-                }
-        }
-        }
         if(inventory.getName().equals(Main.reportInv.getName())){
-            if(e.getSlot() == 53){
-                p.closeInventory();
-                Reports.createInv2(p);
-                //p.openInventory(Main.reportInv2);
+            if(e.isRightClick()) {
+                for (String i : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)) {
+                    int k = Integer.parseInt(i);
 
+                    if (k < 52) {
+
+                        if (DataFile.getData().contains("Reports." + e.getSlot())) {
+                            DataFile.getData().set("Reports." + e.getSlot(), null);
+                            DataFile.saveData();
+                            DataFile.reloadData();
+                            p.closeInventory();
+                            p.sendMessage(Main.prefix + "§aReport # §e" + e.getSlot() + " deleted!");
+                            Reports.createInv(p);
+
+                        }
+                    }
+                }
+            }
+        }else if(inventory.getName().equals(Main.reportInv2.getName())){
+            if(e.isRightClick()){
+                for(String i : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)){
+                    int k = Integer.parseInt(i);
+                    int num = e.getSlot()+53;
+                    if(k <= 97){
+                        if(DataFile.getData().contains("Reports." + num)){
+                            DataFile.getData().set("Reports." + num, null);
+                            DataFile.saveData();
+                            DataFile.reloadData();
+                            p.closeInventory();
+                            p.sendMessage(Main.prefix + "§aReport # §e" + num + " deleted!");
+                            Reports.createInv(p);
+                        }
+                    }
+                }
             }
         }
-        for(String k : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)){
-            int i = Integer.parseInt(k);
-            if(inventory.getName().equals(Main.reportInv2.getName())){
+        if(e.isLeftClick()) {
+            for (String i : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)) {
+                int k = Integer.parseInt(i);
+                if (inventory.getName().equals(Main.reportInv.getName())) {
+                    if (k < 52) {
+                        if (e.getSlot() == k) {
+
+
+                            String reports = DataFile.getData().getString("Reports." + k + ".Player");
+                            String title = DataFile.getData().getString("Reports." + k + ".Title");
+                            String description = DataFile.getData().getString("Reports." + k + ".Description");
+                            e.setCancelled(true);
+                            p.closeInventory();
+
+                            ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
+                            BookMeta bm = (BookMeta) book.getItemMeta();
+                            bm.setDisplayName("§dReport # " + k);
+                            bm.setPages("§dReport Number: " + k + "\n\n" + "§2Player: " + reports + "\n\n" + "§9Title: " + title + "\n\n" + "§6Description:" + "\n§0" + description);
+                            bm.setTitle(title);
+                            bm.setAuthor(reports);
+                            book.setItemMeta(bm);
+
+                            int slot = p.getInventory().getHeldItemSlot();
+                            ItemStack old = p.getInventory().getItem(slot);
+
+                            p.getInventory().setItem(slot, book);
+
+                            ByteBuf buf = Unpooled.buffer(256);
+                            buf.setByte(0, (byte) 0);
+                            buf.writerIndex(1);
+
+                            PacketPlayOutCustomPayload packet = new PacketPlayOutCustomPayload("MC|BOpen", new PacketDataSerializer(buf));
+                            CraftPlayer cp = (CraftPlayer) p;
+                            cp.getHandle().playerConnection.sendPacket(packet);
+
+                            p.getInventory().setItem(slot, old);
+                            p.sendMessage(Main.prefix + "Received Report # " + "§d" + k);
+                        }
+                    } else if (k == 52) {
+                        break;
+                    }
+                }
+            }
+            if (inventory.getName().equals(Main.reportInv.getName())) {
+                if (e.getSlot() == 53) {
+                    p.closeInventory();
+                    Reports.createInv2(p);
+                    //p.openInventory(Main.reportInv2);
+
+                }
+            }
+            for (String k : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)) {
+                int i = Integer.parseInt(k);
+                if (inventory.getName().equals(Main.reportInv2.getName())) {
 
                     if (i >= 53) {
-                        if(e.getSlot() == i%53) {
-                        String reports = DataFile.getData().getString("Reports." + i + ".Player");
-                        String title = DataFile.getData().getString("Reports." + i + ".Title");
-                        String description = DataFile.getData().getString("Reports." + i + ".Description");
-                        e.setCancelled(true);
-                        p.closeInventory();
+                        if (e.getSlot() == i % 53) {
+                            String reports = DataFile.getData().getString("Reports." + i + ".Player");
+                            String title = DataFile.getData().getString("Reports." + i + ".Title");
+                            String description = DataFile.getData().getString("Reports." + i + ".Description");
+                            e.setCancelled(true);
+                            p.closeInventory();
 
-                        ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
-                        BookMeta bm = (BookMeta) book.getItemMeta();
-                        bm.setDisplayName("§dReport # " +i);
-                        bm.setPages("§dReport Number: " + i + "\n\n" +"§2Player: " + reports + "\n\n" +"§9Title: " + title + "\n\n" +"§6Description:" + "\n§0" + description);
-                        bm.setTitle(title);
-                        bm.setAuthor(reports);
-                        book.setItemMeta(bm);
+                            ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
+                            BookMeta bm = (BookMeta) book.getItemMeta();
+                            bm.setDisplayName("§dReport # " + i);
+                            bm.setPages("§dReport Number: " + i + "\n\n" + "§2Player: " + reports + "\n\n" + "§9Title: " + title + "\n\n" + "§6Description:" + "\n§0" + description);
+                            bm.setTitle(title);
+                            bm.setAuthor(reports);
+                            book.setItemMeta(bm);
                             int slot = p.getInventory().getHeldItemSlot();
                             ItemStack old = p.getInventory().getItem(slot);
 
                             p.getInventory().setItem(slot, book);
 
                             ByteBuf buf = Unpooled.buffer(256);
-                            buf.setByte(0, (byte)0);
+                            buf.setByte(0, (byte) 0);
                             buf.writerIndex(1);
 
                             PacketPlayOutCustomPayload packet = new PacketPlayOutCustomPayload("MC|BOpen", new PacketDataSerializer(buf));
-                            CraftPlayer cp = (CraftPlayer)p;
+                            CraftPlayer cp = (CraftPlayer) p;
                             cp.getHandle().playerConnection.sendPacket(packet);
 
                             p.getInventory().setItem(slot, old);
-                        p.sendMessage(Main.prefix + "Received Report # " + "§d" + i);
-                    }else if(i == 97){
-                        break;
+                            p.sendMessage(Main.prefix + "Received Report # " + "§d" + i);
+                        } else if (i == 97) {
+                            break;
+                        }
                     }
                 }
             }
-        }
-        if(inventory.getName().equals(Main.reportInv2.getName())){
-            if(e.getSlot() == 45){
-                p.closeInventory();
-                Reports.createInv(p);
-                //p.openInventory(Main.reportInv);
+            if (inventory.getName().equals(Main.reportInv2.getName())) {
+                if (e.getSlot() == 45) {
+                    p.closeInventory();
+                    Reports.createInv(p);
+                    //p.openInventory(Main.reportInv);
 
-            }
-        }
-        if(inventory.getName().equalsIgnoreCase(Main.reportInv2.getName())){
-            if(e.getSlot() == 53){
-                p.closeInventory();
-                Reports.createInv3(p);
-                //p.openInventory(Main.reportInv3);
-
-            }
-        }
-        if(inventory.getName().equalsIgnoreCase(Main.reportInv3.getName())){
-            if(e.getSlot() == 45){
-                p.closeInventory();
-                Reports.createInv2(p);
-               // p.openInventory(Main.reportInv2);
-
-            }
-            if(e.getSlot() == 53){
-                p.closeInventory();
-                Reports.createInv4(p);
-                //p.openInventory(Main.reportInv4);
-
-            }
-        }
-        if(inventory.getName().equalsIgnoreCase(Main.reportInv4.getName())){
-            if(e.getSlot() == 45){
-                p.closeInventory();
-                Reports.createInv3(p);
-                //p.openInventory(Main.reportInv3);
-
-            }
-        }
-        for(String k : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)){
-            int j = Integer.parseInt(k);
-            if(inventory.getName().equals(Main.reportInv3.getName())){
-                    if(j >= 98){
-                        if(e.getSlot() == j%98){
-                        String reports = DataFile.getData().getString("Reports." + j + ".Player");
-                        String title = DataFile.getData().getString("Reports." + j + ".Title");
-                        String description = DataFile.getData().getString("Reports." + j + ".Description");
-                        e.setCancelled(true);
-                        p.closeInventory();
-
-                        ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
-                        BookMeta bm = (BookMeta) book.getItemMeta();
-                        bm.setDisplayName("§dReport # " + j);
-                        bm.setPages("§dReport Number: " + j + "\n\n" +"§2Player: " + reports + "\n\n" +"§9Title: " + title + "\n\n" +"§6Description:" + "\n§0" + description);
-                        bm.setTitle(title);
-                        bm.setAuthor(reports);
-                        book.setItemMeta(bm);
-                            int slot = p.getInventory().getHeldItemSlot();
-                            ItemStack old = p.getInventory().getItem(slot);
-
-                            p.getInventory().setItem(slot, book);
-
-                            ByteBuf buf = Unpooled.buffer(256);
-                            buf.setByte(0, (byte)0);
-                            buf.writerIndex(1);
-
-                            PacketPlayOutCustomPayload packet = new PacketPlayOutCustomPayload("MC|BOpen", new PacketDataSerializer(buf));
-                            CraftPlayer cp = (CraftPlayer)p;
-                            cp.getHandle().playerConnection.sendPacket(packet);
-
-                            p.getInventory().setItem(slot, old);
-                        p.sendMessage(Main.prefix + "Received Report # " + "§d" + j);
-                    }else if(j == 142){
-                        break;
-                    }
                 }
             }
-        }
-        for(String k : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)){
-            if(inventory.getName().equals(Main.reportInv4.getName())){
+            if (inventory.getName().equalsIgnoreCase(Main.reportInv2.getName())) {
+                if (e.getSlot() == 53) {
+                    p.closeInventory();
+                    Reports.createInv3(p);
+                    //p.openInventory(Main.reportInv3);
+
+                }
+            }
+            if (inventory.getName().equalsIgnoreCase(Main.reportInv3.getName())) {
+                if (e.getSlot() == 45) {
+                    p.closeInventory();
+                    Reports.createInv2(p);
+                    // p.openInventory(Main.reportInv2);
+
+                }
+                if (e.getSlot() == 53) {
+                    p.closeInventory();
+                    Reports.createInv4(p);
+                    //p.openInventory(Main.reportInv4);
+
+                }
+            }
+            if (inventory.getName().equalsIgnoreCase(Main.reportInv4.getName())) {
+                if (e.getSlot() == 45) {
+                    p.closeInventory();
+                    Reports.createInv3(p);
+                    //p.openInventory(Main.reportInv3);
+
+                }
+            }
+            for (String k : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)) {
                 int j = Integer.parseInt(k);
-                    if(j >= 143){
-                        if(e.getSlot() == j%143){
-                        String reports = DataFile.getData().getString("Reports." + j + ".Player");
-                        String title = DataFile.getData().getString("Reports." + j + ".Title");
-                        String description = DataFile.getData().getString("Reports." + j + ".Description");
-                        e.setCancelled(true);
-                        p.closeInventory();
+                if (inventory.getName().equals(Main.reportInv3.getName())) {
+                    if (j >= 98) {
+                        if (e.getSlot() == j % 98) {
+                            String reports = DataFile.getData().getString("Reports." + j + ".Player");
+                            String title = DataFile.getData().getString("Reports." + j + ".Title");
+                            String description = DataFile.getData().getString("Reports." + j + ".Description");
+                            e.setCancelled(true);
+                            p.closeInventory();
 
-                        ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
-                        BookMeta bm = (BookMeta) book.getItemMeta();
-                        bm.setDisplayName("§dReport # " + j);
-                        bm.setPages("§dReport Number: " + j + "\n\n" +"§2Player: " + reports + "\n\n" +"§9Title: " + title + "\n\n" +"§6Description:" + "\n§0" + description);
-                        bm.setTitle(title);
-                        bm.setAuthor(reports);
-                        book.setItemMeta(bm);
+                            ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
+                            BookMeta bm = (BookMeta) book.getItemMeta();
+                            bm.setDisplayName("§dReport # " + j);
+                            bm.setPages("§dReport Number: " + j + "\n\n" + "§2Player: " + reports + "\n\n" + "§9Title: " + title + "\n\n" + "§6Description:" + "\n§0" + description);
+                            bm.setTitle(title);
+                            bm.setAuthor(reports);
+                            book.setItemMeta(bm);
                             int slot = p.getInventory().getHeldItemSlot();
                             ItemStack old = p.getInventory().getItem(slot);
 
                             p.getInventory().setItem(slot, book);
 
                             ByteBuf buf = Unpooled.buffer(256);
-                            buf.setByte(0, (byte)0);
+                            buf.setByte(0, (byte) 0);
                             buf.writerIndex(1);
 
                             PacketPlayOutCustomPayload packet = new PacketPlayOutCustomPayload("MC|BOpen", new PacketDataSerializer(buf));
-                            CraftPlayer cp = (CraftPlayer)p;
+                            CraftPlayer cp = (CraftPlayer) p;
                             cp.getHandle().playerConnection.sendPacket(packet);
 
                             p.getInventory().setItem(slot, old);
-                        p.sendMessage(Main.prefix + "Received Report # " + "§d" + j);
-                    }else if (j == 187){
-                        break;
+                            p.sendMessage(Main.prefix + "Received Report # " + "§d" + j);
+                        } else if (j == 142) {
+                            break;
+                        }
+                    }
+                }
+            }
+            for (String k : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)) {
+                if (inventory.getName().equals(Main.reportInv4.getName())) {
+                    int j = Integer.parseInt(k);
+                    if (j >= 143) {
+                        if (e.getSlot() == j % 143) {
+                            String reports = DataFile.getData().getString("Reports." + j + ".Player");
+                            String title = DataFile.getData().getString("Reports." + j + ".Title");
+                            String description = DataFile.getData().getString("Reports." + j + ".Description");
+                            e.setCancelled(true);
+                            p.closeInventory();
+
+                            ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
+                            BookMeta bm = (BookMeta) book.getItemMeta();
+                            bm.setDisplayName("§dReport # " + j);
+                            bm.setPages("§dReport Number: " + j + "\n\n" + "§2Player: " + reports + "\n\n" + "§9Title: " + title + "\n\n" + "§6Description:" + "\n§0" + description);
+                            bm.setTitle(title);
+                            bm.setAuthor(reports);
+                            book.setItemMeta(bm);
+                            int slot = p.getInventory().getHeldItemSlot();
+                            ItemStack old = p.getInventory().getItem(slot);
+
+                            p.getInventory().setItem(slot, book);
+
+                            ByteBuf buf = Unpooled.buffer(256);
+                            buf.setByte(0, (byte) 0);
+                            buf.writerIndex(1);
+
+                            PacketPlayOutCustomPayload packet = new PacketPlayOutCustomPayload("MC|BOpen", new PacketDataSerializer(buf));
+                            CraftPlayer cp = (CraftPlayer) p;
+                            cp.getHandle().playerConnection.sendPacket(packet);
+
+                            p.getInventory().setItem(slot, old);
+                            p.sendMessage(Main.prefix + "Received Report # " + "§d" + j);
+                        } else if (j == 187) {
+                            break;
+                        }
                     }
                 }
             }
         }
+        e.setCancelled(true);
     }
 
     @EventHandler

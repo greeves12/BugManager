@@ -27,6 +27,7 @@ public class MainCommand implements CommandExecutor {
     }
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
+
         if (sender instanceof Player) {
             Player p = (Player) sender;
             if (args.length == 0) {
@@ -58,9 +59,10 @@ public class MainCommand implements CommandExecutor {
                         HelpCommand.help(p, args);
                     }
                 if (args[0].equalsIgnoreCase("view")) {
+                    Reports reports = new Reports();
                     if (p.hasPermission("bugreport.view")) {
 
-                       Reports.createInv(p);
+                       reports.createInv(p);
                     } else {
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + LangFile.getData().getString("noperm-message")));
                     }
@@ -81,9 +83,10 @@ public class MainCommand implements CommandExecutor {
                 }
                 if (args[0].equalsIgnoreCase("delete")) {
                     if (p.hasPermission("bugreport.delete")) {
+                        Reports reports = new Reports();
                         if (args.length >= 2) {
                             int k = Integer.parseInt(args[1]);
-                            Reports.deleteReport(k, p);
+                            reports.deleteReport(k, p);
 
                         }
                     } else {

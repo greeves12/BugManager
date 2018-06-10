@@ -25,6 +25,11 @@ public class Reports {
     public static int cooldown = ThisPlugin.getPlugin().getConfig().getInt("cool-down");
     public static int newID;
     public static HashMap<UUID, Long> coolDown = new HashMap<>();
+
+    public  Inventory reportInv = Bukkit.createInventory(null, 54, "§dReports Page 1:");
+    public  Inventory reportInv2 = Bukkit.createInventory(null, 54, "§dReports Page 2:");
+    public  Inventory reportInv3 = Bukkit.createInventory(null, 54, "§dReports Page 3:");
+    public  Inventory reportInv4 = Bukkit.createInventory(null, 54, "§dReports Page 4:");
     //public static HashMap<String, Inventory> hasPlayer = new HashMap<>();
 
 
@@ -74,7 +79,7 @@ public class Reports {
         }
     }
 
-    public static void deleteReport(int k, Player p) {
+    public void deleteReport(int k, Player p) {
         if (DataFile.getData().contains("Reports." + k)) {
             DataFile.getData().set("Reports." + k, null);
             DataFile.saveData();
@@ -82,16 +87,16 @@ public class Reports {
             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.prefix + LangFile.getData().getString("delete-message").replaceAll("%report#%", String.valueOf(k))));
 
             if(k <=52){
-                Main.reportInv.setItem(k, null);
+                reportInv.setItem(k, null);
             }
             if (k >= 53) {
-                Main.reportInv2.setItem(k % 53, null);
+                reportInv2.setItem(k % 53, null);
             }
             if(k >=99){
-                Main.reportInv3.setItem(k % 99, null);
+               reportInv3.setItem(k % 99, null);
             }
             if(k>=143){
-                Main.reportInv4.setItem(k % 143, null);
+                reportInv4.setItem(k % 143, null);
             }
             if(k > 188){
                 p.sendMessage(Main.prefix + "§cInvalid argument (" + k + "§c)");
@@ -104,8 +109,8 @@ public class Reports {
 
 
 
-    public static void createInv(Player p) {
-        Main.reportInv = Bukkit.createInventory(p, 54, "§dReports Page 1:");
+    public  void createInv(Player p) {
+        reportInv = Bukkit.createInventory(p, 54, "§dReports Page 1:");
         File file = new File("plugins/BugReport/data.yml");
         try{
             BufferedReader bf = new BufferedReader(new FileReader(file));
@@ -128,7 +133,7 @@ public class Reports {
                         lore.add("§8Time: §a" + cal);
                         meta.setLore(lore);
                         Stack.setItemMeta(meta);
-                        Main.reportInv.setItem(Integer.parseInt(k), Stack);
+                       reportInv.setItem(Integer.parseInt(k), Stack);
                         if (j == 52) {
                             break;
                         }
@@ -138,9 +143,9 @@ public class Reports {
                 ItemMeta Meta = anvil.getItemMeta();
                 Meta.setDisplayName("§bNext Page");
                 anvil.setItemMeta(Meta);
-                Main.reportInv.setItem(53, anvil);
+                reportInv.setItem(53, anvil);
 
-                p.openInventory(Main.reportInv);
+                p.openInventory(reportInv);
             }else{
                 p.sendMessage(Main.prefix + "§eNo bug reports found!");
             }
@@ -152,8 +157,8 @@ public class Reports {
 
    // }
 
-    public static void createInv2(Player p) {
-        Main.reportInv2 = Bukkit.createInventory(p, 54, "§dReports Page 2:");
+    public  void createInv2(Player p) {
+        reportInv2 = Bukkit.createInventory(p, 54, "§dReports Page 2:");
         for (String i  : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)) {
             int j = Integer.parseInt(i);
             //if (!hasPlayer.containsKey(p.getName())) {
@@ -172,7 +177,7 @@ public class Reports {
                     lore.add("§8Time: §a" + cal);
                     meta.setLore(lore);
                     Stack.setItemMeta(meta);
-                    Main.reportInv2.setItem(j % 53, Stack);
+                    reportInv2.setItem(j % 53, Stack);
                     if (j == 97) {
                         break;
                     }
@@ -181,23 +186,23 @@ public class Reports {
                 ItemMeta Meta = anvil.getItemMeta();
                 Meta.setDisplayName("§bNext Page");
                 anvil.setItemMeta(Meta);
-                Main.reportInv2.setItem(53, anvil);
+                reportInv2.setItem(53, anvil);
 
                 ItemStack anvil1 = new ItemStack(Material.ANVIL, 1);
                 ItemMeta Meta1 = anvil1.getItemMeta();
                 Meta1.setDisplayName("§bPrevious Page");
                 anvil1.setItemMeta(Meta1);
-                Main.reportInv2.setItem(45, anvil1);
+                reportInv2.setItem(45, anvil1);
 
 
             }
-        p.openInventory(Main.reportInv2);
+        p.openInventory(reportInv2);
         }
 
 
 
-    public static void createInv3(Player p){
-        Main.reportInv3 = Bukkit.createInventory(p, 54, "§dReports Page 3:");
+    public  void createInv3(Player p){
+       reportInv3 = Bukkit.createInventory(p, 54, "§dReports Page 3:");
         for (String i  : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)) {
             int j = Integer.parseInt(i);
             //if (!hasPlayer.containsKey(p.getName())) {
@@ -216,7 +221,7 @@ public class Reports {
                     lore.add("§8Time: §a" + cal);
                     meta.setLore(lore);
                     Stack.setItemMeta(meta);
-                    Main.reportInv3.setItem(j % 98, Stack);
+                    reportInv3.setItem(j % 98, Stack);
 
                 }
                 if (j == 142) {
@@ -226,22 +231,22 @@ public class Reports {
                 ItemMeta Meta = anvil.getItemMeta();
                 Meta.setDisplayName("§bNext Page");
                 anvil.setItemMeta(Meta);
-                Main.reportInv3.setItem(53, anvil);
+                reportInv3.setItem(53, anvil);
 
                 ItemStack anvil1 = new ItemStack(Material.ANVIL, 1);
                 ItemMeta Meta1 = anvil1.getItemMeta();
                 Meta1.setDisplayName("§bPrevious Page");
                 anvil1.setItemMeta(Meta1);
-                Main.reportInv3.setItem(45, anvil1);
+                reportInv3.setItem(45, anvil1);
 
             }
-        p.openInventory(Main.reportInv3);
+        p.openInventory(reportInv3);
         }
 
 
 
-    public static void createInv4(Player p){
-        Main.reportInv4 = Bukkit.createInventory(p, 54, "§dReports Page 4:");
+    public  void createInv4(Player p){
+        reportInv4 = Bukkit.createInventory(p, 54, "§dReports Page 4:");
         for (String i  : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)) {
             int j = Integer.parseInt(i);
 
@@ -260,7 +265,7 @@ public class Reports {
                     lore.add("§8Time: §a" + cal);
                     meta.setLore(lore);
                     Stack.setItemMeta(meta);
-                    Main.reportInv4.setItem(j % 143, Stack);
+                  reportInv4.setItem(j % 143, Stack);
                     if (j == 187) {
                         break;
                     }
@@ -269,9 +274,9 @@ public class Reports {
                 ItemMeta Meta1 = anvil1.getItemMeta();
                 Meta1.setDisplayName("§bPrevious Page");
                 anvil1.setItemMeta(Meta1);
-                Main.reportInv4.setItem(45, anvil1);
+               reportInv4.setItem(45, anvil1);
             }
-        p.openInventory(Main.reportInv4);
+        p.openInventory(reportInv4);
         }
 
     }

@@ -43,8 +43,9 @@ public class Listeners implements Listener {
         Inventory inventory = e.getInventory();
 
         ItemStack b = new ItemStack(Material.BOOK,1);
+        Reports reports = new Reports();
 
-        if(inventory.getName().equals(Main.reportInv.getName())){
+        if(inventory.getName().equals(reports.reportInv.getName())){
             if(e.isRightClick()) {
                 for (String i : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)) {
                     int k = Integer.parseInt(i);
@@ -57,13 +58,13 @@ public class Listeners implements Listener {
                             DataFile.reloadData();
                             p.closeInventory();
                             p.sendMessage(Main.prefix + "§aReport # §e" + e.getSlot() + " deleted!");
-                            Reports.createInv(p);
+                            reports.createInv(p);
 
                         }
                     }
                 }
             }
-        }else if(inventory.getName().equals(Main.reportInv2.getName())){
+        }else if(inventory.getName().equals(reports.reportInv2.getName())){
             if(e.isRightClick()){
                 for(String i : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)){
                     int k = Integer.parseInt(i);
@@ -75,12 +76,12 @@ public class Listeners implements Listener {
                             DataFile.reloadData();
                             p.closeInventory();
                             p.sendMessage(Main.prefix + "§aReport # §e" + num + " deleted!");
-                            Reports.createInv2(p);
+                            reports.createInv2(p);
                         }
                     }
                 }
             }
-        }else if(inventory.getName().equals(Main.reportInv3.getName())){
+        }else if(inventory.getName().equals(reports.reportInv3.getName())){
             if(e.isRightClick()){
                 for(String i : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)){
                     int k = Integer.parseInt(i);
@@ -92,12 +93,12 @@ public class Listeners implements Listener {
                             DataFile.reloadData();
                             p.closeInventory();
                             p.sendMessage(Main.prefix + "§aReport # §e" + num + " deleted!");
-                            Reports.createInv3(p);
+                            reports.createInv3(p);
                         }
                     }
                 }
             }
-        }else if(inventory.getName().equals(Main.reportInv4.getName())){
+        }else if(inventory.getName().equals(reports.reportInv4.getName())){
             if(e.isRightClick()){
                 for(String i : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)){
                     int k = Integer.parseInt(i);
@@ -110,7 +111,7 @@ public class Listeners implements Listener {
                             DataFile.reloadData();
                             p.closeInventory();
                             p.sendMessage(Main.prefix + "§aReport # §e" + num + " deleted!");
-                            Reports.createInv4(p);
+                            reports.createInv4(p);
                         }
                     }
                 }
@@ -119,12 +120,12 @@ public class Listeners implements Listener {
         if(e.isLeftClick()) {
             for (String i : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)) {
                 int k = Integer.parseInt(i);
-                if (inventory.getName().equals(Main.reportInv.getName())) {
+                if (inventory.getName().equals(reports.reportInv.getName())) {
                     if (k < 52) {
                         if (e.getSlot() == k) {
 
 
-                            String reports = DataFile.getData().getString("Reports." + k + ".Player");
+                            String reportss = DataFile.getData().getString("Reports." + k + ".Player");
                             String title = DataFile.getData().getString("Reports." + k + ".Title");
                             String description = DataFile.getData().getString("Reports." + k + ".Description");
                             e.setCancelled(true);
@@ -135,7 +136,7 @@ public class Listeners implements Listener {
                             bm.setDisplayName("§dReport # " + k);
                             bm.setPages("§dReport Number: " + k + "\n\n" + "§2Player: " + reports + "\n\n" + "§9Title: " + title + "\n\n" + "§6Description:" + "\n§0" + description);
                             bm.setTitle(title);
-                            bm.setAuthor(reports);
+                            bm.setAuthor(reportss);
                             book.setItemMeta(bm);
 
                             int slot = p.getInventory().getHeldItemSlot();
@@ -159,21 +160,21 @@ public class Listeners implements Listener {
                     }
                 }
             }
-            if (inventory.getName().equals(Main.reportInv.getName())) {
+            if (inventory.getName().equals(reports.reportInv.getName())) {
                 if (e.getSlot() == 53) {
                     p.closeInventory();
-                    Reports.createInv2(p);
+                    reports.createInv2(p);
                     //p.openInventory(Main.reportInv2);
 
                 }
             }
             for (String k : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)) {
                 int i = Integer.parseInt(k);
-                if (inventory.getName().equals(Main.reportInv2.getName())) {
+                if (inventory.getName().equals(reports.reportInv2.getName())) {
 
                     if (i >= 53) {
                         if (e.getSlot() == i % 53) {
-                            String reports = DataFile.getData().getString("Reports." + i + ".Player");
+                            String reportss = DataFile.getData().getString("Reports." + i + ".Player");
                             String title = DataFile.getData().getString("Reports." + i + ".Title");
                             String description = DataFile.getData().getString("Reports." + i + ".Description");
                             e.setCancelled(true);
@@ -184,7 +185,7 @@ public class Listeners implements Listener {
                             bm.setDisplayName("§dReport # " + i);
                             bm.setPages("§dReport Number: " + i + "\n\n" + "§2Player: " + reports + "\n\n" + "§9Title: " + title + "\n\n" + "§6Description:" + "\n§0" + description);
                             bm.setTitle(title);
-                            bm.setAuthor(reports);
+                            bm.setAuthor(reportss);
                             book.setItemMeta(bm);
                             int slot = p.getInventory().getHeldItemSlot();
                             ItemStack old = p.getInventory().getItem(slot);
@@ -207,50 +208,50 @@ public class Listeners implements Listener {
                     }
                 }
             }
-            if (inventory.getName().equals(Main.reportInv2.getName())) {
+            if (inventory.getName().equals(reports.reportInv2.getName())) {
                 if (e.getSlot() == 45) {
                     p.closeInventory();
-                    Reports.createInv(p);
+                    reports.createInv(p);
                     //p.openInventory(Main.reportInv);
 
                 }
             }
-            if (inventory.getName().equalsIgnoreCase(Main.reportInv2.getName())) {
+            if (inventory.getName().equalsIgnoreCase(reports.reportInv2.getName())) {
                 if (e.getSlot() == 53) {
                     p.closeInventory();
-                    Reports.createInv3(p);
+                    reports.createInv3(p);
                     //p.openInventory(Main.reportInv3);
 
                 }
             }
-            if (inventory.getName().equalsIgnoreCase(Main.reportInv3.getName())) {
+            if (inventory.getName().equalsIgnoreCase(reports.reportInv3.getName())) {
                 if (e.getSlot() == 45) {
                     p.closeInventory();
-                    Reports.createInv2(p);
+                    reports.createInv2(p);
                     // p.openInventory(Main.reportInv2);
 
                 }
                 if (e.getSlot() == 53) {
                     p.closeInventory();
-                    Reports.createInv4(p);
+                    reports.createInv4(p);
                     //p.openInventory(Main.reportInv4);
 
                 }
             }
-            if (inventory.getName().equalsIgnoreCase(Main.reportInv4.getName())) {
+            if (inventory.getName().equalsIgnoreCase(reports.reportInv4.getName())) {
                 if (e.getSlot() == 45) {
                     p.closeInventory();
-                    Reports.createInv3(p);
+                    reports.createInv3(p);
                     //p.openInventory(Main.reportInv3);
 
                 }
             }
             for (String k : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)) {
                 int j = Integer.parseInt(k);
-                if (inventory.getName().equals(Main.reportInv3.getName())) {
+                if (inventory.getName().equals(reports.reportInv3.getName())) {
                     if (j >= 98) {
                         if (e.getSlot() == j % 98) {
-                            String reports = DataFile.getData().getString("Reports." + j + ".Player");
+                            String reportss = DataFile.getData().getString("Reports." + j + ".Player");
                             String title = DataFile.getData().getString("Reports." + j + ".Title");
                             String description = DataFile.getData().getString("Reports." + j + ".Description");
                             e.setCancelled(true);
@@ -261,7 +262,7 @@ public class Listeners implements Listener {
                             bm.setDisplayName("§dReport # " + j);
                             bm.setPages("§dReport Number: " + j + "\n\n" + "§2Player: " + reports + "\n\n" + "§9Title: " + title + "\n\n" + "§6Description:" + "\n§0" + description);
                             bm.setTitle(title);
-                            bm.setAuthor(reports);
+                            bm.setAuthor(reportss);
                             book.setItemMeta(bm);
                             int slot = p.getInventory().getHeldItemSlot();
                             ItemStack old = p.getInventory().getItem(slot);
@@ -285,11 +286,11 @@ public class Listeners implements Listener {
                 }
             }
             for (String k : DataFile.getData().getConfigurationSection("Reports.").getKeys(false)) {
-                if (inventory.getName().equals(Main.reportInv4.getName())) {
+                if (inventory.getName().equals(reports.reportInv4.getName())) {
                     int j = Integer.parseInt(k);
                     if (j >= 143) {
                         if (e.getSlot() == j % 143) {
-                            String reports = DataFile.getData().getString("Reports." + j + ".Player");
+                            String reportss = DataFile.getData().getString("Reports." + j + ".Player");
                             String title = DataFile.getData().getString("Reports." + j + ".Title");
                             String description = DataFile.getData().getString("Reports." + j + ".Description");
                             e.setCancelled(true);
@@ -300,7 +301,7 @@ public class Listeners implements Listener {
                             bm.setDisplayName("§dReport # " + j);
                             bm.setPages("§dReport Number: " + j + "\n\n" + "§2Player: " + reports + "\n\n" + "§9Title: " + title + "\n\n" + "§6Description:" + "\n§0" + description);
                             bm.setTitle(title);
-                            bm.setAuthor(reports);
+                            bm.setAuthor(reportss);
                             book.setItemMeta(bm);
                             int slot = p.getInventory().getHeldItemSlot();
                             ItemStack old = p.getInventory().getItem(slot);

@@ -1,0 +1,9 @@
+name: BugReport
+version: 2.0.4
+author: tatemylove
+main: com.tatemylove.BugReport.Main
+commands:
+  bugreport:
+    usage: /<command>
+    description: Reports a bug
+  report:

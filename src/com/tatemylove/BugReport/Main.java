@@ -8,7 +8,6 @@ import com.tatemylove.BugReport.Misc.Reminder;
 import com.tatemylove.BugReport.Plugin.ThisPlugin;
 import com.tatemylove.BugReport.Updater.CheckUpdate;
 import org.bukkit.Bukkit;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.java.JavaPlugin;
 
 
@@ -17,10 +16,9 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class Main extends JavaPlugin{
     public static final String prefix = "§d[Bug§bManager] ";
-    public static final String version = "2.0.4";
+    public static final String version = "2.0.6";
     private static int startCountdownId;
     public static int timeUntilStart;
-
 
 
     public void onEnable() {

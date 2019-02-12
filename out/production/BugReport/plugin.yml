@@ -1,7 +1,8 @@
 name: BugReport
-version: 2.0.4
+version: 2.0.6
 author: tatemylove
 main: com.tatemylove.BugReport.Main
+api-version: 1.13
 commands:
   bugreport:
     usage: /<command>
